@@ -1,0 +1,57 @@
+.home {
+  width: 100vw;
+
+  .home-content {
+    padding: 0 16px 16px 16px;
+  }
+
+  .home-extra {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 72px);
+    min-height: 514px;
+    padding: 0 16px 16px 0;
+  }
+
+  .card {
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    background-color: #272626;
+    margin-bottom: 16px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    p {
+      color: #fff;
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 1;
+      padding: 0 8px;
+      margin: 0;
+    }
+
+    .tick {
+      font-size: 10vw;
+    }
+  }
+}
+
+.home-pc {
+  height: calc(100vh - 72px);
+  min-height: 514px;
+
+  .card {
+    height: 100%;
+  }
+}
+
+.home-mobile {
+  height: calc(100vh - 72px);
+
+  .card {
+    height: calc((100% - 16px * 3) / 4);
+  }
+}
