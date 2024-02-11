@@ -6,7 +6,15 @@ import ErrorBoundary from '@/components/common/error-boundary';
 
 const App: FunctionComponent = () => (
   <ErrorBoundary>
-    <ConfigProvider locale={zhCN} componentSize="middle">
+    <ConfigProvider
+      locale={zhCN}
+      componentSize="large"
+      theme={{
+        token: {
+          colorPrimary: '#0960bd',
+        },
+      }}
+    >
       <Router />
     </ConfigProvider>
   </ErrorBoundary>

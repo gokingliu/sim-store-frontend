@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Col, Grid, Row } from 'antd';
-import { PropsResponsive } from '@/types/modules/components/responsive';
+import { PropsResponsive } from '@/types';
 
 const Responsive: FC<PropsResponsive> = ({ children, extra }) => {
   /** DisplayName */

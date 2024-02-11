@@ -32,9 +32,9 @@ const Home: FC = () => {
       },
     };
     const webSocket = new WebSocketClient({ baseURL: `${baseEnv.ws}/QueryFriendsInfo`, handler });
-    webSocket.send('{"api":"info"}');
+    webSocket.send('{"apis":"info"}');
     const t = setInterval(() => {
-      webSocket.send('{"api":"info"}');
+      webSocket.send('{"apis":"info"}');
     }, 1000);
     return () => {
       webSocket.close();

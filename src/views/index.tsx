@@ -4,7 +4,7 @@ import { Layout, Space } from 'antd';
 import Loading from '@/components/common/loading';
 import NotAuthorized from './403';
 import Logo from '../assets/img/logo.png';
-import Api from '@/api';
+import Api from '@/apis';
 import './index.less';
 
 const Index: FC = () => {

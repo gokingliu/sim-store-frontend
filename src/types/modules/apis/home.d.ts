@@ -1,5 +1,4 @@
 // GetTime 接口
-
 export interface ResponseTime {
   api: string;
   v: string;
