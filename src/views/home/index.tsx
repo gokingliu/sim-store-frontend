@@ -1,7 +1,7 @@
 import React, { useEffect, useState, FC } from 'react';
 import CardBox from '@/components/business/cardbox';
 import Flipper from '@/components/business/flipper';
-import Responsive from '@/components/business/responsive';
+import Responsive from '@/components/common/responsive';
 import Time from '@/components/business/time';
 import './index.less';
 import { baseEnv, WebSocketClient } from '@/http';

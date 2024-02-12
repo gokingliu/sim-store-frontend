@@ -1,4 +1,4 @@
-import { CommonObject } from '../common';
+import { CommonObject } from '../../common';
 
 export interface ConfigFormProps {
   formConfig: CommonObject;
