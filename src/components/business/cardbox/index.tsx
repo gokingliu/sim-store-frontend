@@ -8,7 +8,7 @@ const CardBox: FC<PropsCardBox> = ({ title, children }) => {
 
   /** Data */
   const styles = {
-    header: { minHeight: 46, color: '#fff', borderColor: '#171514', borderWidth: 2 },
+    header: { minHeight: 46, color: '#171514', borderColor: '#eee', borderWidth: 2 },
     body: { display: 'flex', alignItems: 'center', justifyContent: 'center', height: 'calc(100% - 46px)' },
   };
 

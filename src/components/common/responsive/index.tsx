@@ -1,41 +1,19 @@
-import React, { FC } from 'react';
-import { Col, Grid, Row } from 'antd';
-import { PropsResponsive } from '@/types';
+import { useRef } from 'react';
+import { Grid } from 'antd';
 
-const Responsive: FC<PropsResponsive> = ({ children, extra }) => {
-  /** DisplayName */
-  Responsive.displayName = 'Responsive';
-
+const Responsive = () => {
   /** Data */
   const screens = Grid.useBreakpoint();
-  let isPC = true;
-  isPC = !!Object.entries(screens).length
+  const isDesktop = useRef(true);
+  isDesktop.current = !!Object.entries(screens).length
     ? Object.entries(screens)
         .filter((screen) => screen[1])
         .map((screen) => screen[0])
         .some((screen) => ['md', 'lg', 'xl', 'xxl'].includes(screen))
-    : isPC;
+    : isDesktop.current;
 
   /** ReactDOM */
-  return isPC ? (
-    <Row className="home home-pc">
-      <Col className="home-content" span={18}>
-        {children}
-      </Col>
-
-      <Col className="home-extra" span={6}>
-        {extra}
-      </Col>
-    </Row>
-  ) : (
-    <Row className="home home-mobile" wrap>
-      <Col className="home-content" span={24}>
-        {children}
-
-        {extra}
-      </Col>
-    </Row>
-  );
+  return isDesktop;
 };
 
 export default Responsive;

@@ -1,6 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
-import { Layout, Space } from 'antd';
+import { Button, Layout } from 'antd';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import SiderMenu from '@/components/business/sider-menu';
 import Loading from '@/components/common/loading';
 import NotAuthorized from './403';
 import Logo from '../assets/img/logo.png';
@@ -14,6 +16,7 @@ const Index: FC = () => {
   /** Data */
   const [auth, setAuth] = useState(true);
   const [loading, setLoading] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
 
   /** Router Params **/
   const { uuid } = useParams();
@@ -40,16 +43,30 @@ const Index: FC = () => {
 
   return (
     <Layout className="index">
-      <Layout.Header className="index-header">
-        <Space>
+      <Layout.Sider width={210} trigger={null} collapsible collapsed={collapsed}>
+        <div className="sider-logo">
           <img className="logo" src={Logo} alt="logo" />
-          <>微信通讯录人数</>
-        </Space>
-      </Layout.Header>
+          <div className="logo-title" style={collapsed ? { display: 'none' } : void 0}>
+            SIM Store
+          </div>
+        </div>
 
-      <Layout.Content className="index-content">
-        {loading ? <Loading /> : auth ? <Outlet /> : <NotAuthorized />}
-      </Layout.Content>
+        <SiderMenu />
+      </Layout.Sider>
+
+      <Layout>
+        <Layout.Header className="index-header">
+          <Button
+            className="header-button"
+            type="text"
+            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            onClick={() => setCollapsed(!collapsed)}
+          />
+        </Layout.Header>
+        <Layout.Content className="index-content">
+          {loading ? <Loading /> : auth ? <Outlet /> : <NotAuthorized />}
+        </Layout.Content>
+      </Layout>
     </Layout>
   );
 };

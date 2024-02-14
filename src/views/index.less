@@ -1,27 +1,60 @@
 .index {
   width: 100vw;
+  height: 100vh;
   min-height: 600px;
-  background-color: #171514;
+
+    .sider-logo {
+      display: flex;
+      align-items: center;
+      height: 48px;
+      border-color: rgb(23, 21, 20);
+
+      .logo {
+        display: block;
+        width: 32px;
+        height: 32px;
+        margin: 0 10px 0 24px;
+      }
+
+      .logo-title {
+        animation: opacity 0.5s linear;
+        line-height: 48px;
+        font-size: 16px;
+        font-weight: 800;
+        color: #fff;
+      }
+
+      @keyframes opacity {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    }
 
   .index-header {
-    height: 56px;
-    line-height: 56px;
+    height: 48px;
+    line-height: 48px;
     font-size: 20px;
     font-weight: 600;
     border-color: rgb(23, 21, 20);
     color: rgb(255, 255, 255);
-    padding: 0 24px;
-    background-color: #272626;
+    padding: 0;
+    background-color: #fff;
     box-shadow: 0 3px 10px 0 rgb(0 0 0 / 50%);
 
-    .logo {
-      display: block;
-      width: 32px;
-      height: 32px;
+    .header-button {
+      width: 48px;
+      height: 48px;
+      font-size: 16px;
     }
   }
 
   .index-content {
+    height: calc(100vh - 48px);
     margin-top: 16px;
+    padding: 0 16px 16px 16px;
   }
 }
