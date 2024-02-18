@@ -1,3 +1,3 @@
-export interface PropsStrengthMeter {
+export interface PropsLoginStrengthMeter {
   password: string;
 }

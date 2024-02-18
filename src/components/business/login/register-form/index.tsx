@@ -1,15 +1,15 @@
 import React, { FC, useState } from 'react';
 import { Button, Checkbox, Form, FormInstance, Input, message, Typography } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { RequestRegister, PropsLogin } from '@/types';
+import { RequestRegister, PropsLoginRegisterForm } from '@/types';
 import ConfigForm from '@/components/common/config-form';
-import StrengthMeter from '@/components/business/login/strength-meter';
+import LoginStrengthMeter from '@/components/business/login/strength-meter';
 import Api from '@/apis';
 import { checkPassword, checkUserName } from '@/utils';
 
-const Register: FC<PropsLogin> = ({ getValue }) => {
+const LoginRegisterForm: FC<PropsLoginRegisterForm> = ({ getValue }) => {
   /** DisplayName */
-  Register.displayName = 'StrengthMeter';
+  LoginRegisterForm.displayName = 'LoginRegisterForm';
 
   /** Data */
   const [registerLoading, setRegisterLoading] = useState(false); // 注册按钮 loading
@@ -99,7 +99,7 @@ const Register: FC<PropsLogin> = ({ getValue }) => {
           },
           {
             className: 'strength-meter',
-            children: <StrengthMeter password={passwordValue} />,
+            children: <LoginStrengthMeter password={passwordValue} />,
           },
           {
             name: 'password2',
@@ -142,4 +142,4 @@ const Register: FC<PropsLogin> = ({ getValue }) => {
   );
 };
 
-export default Register;
+export default LoginRegisterForm;

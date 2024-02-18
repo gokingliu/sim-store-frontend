@@ -2,12 +2,12 @@ import React, { FC, useState } from 'react';
 import { Button, Checkbox, Form, Input, message, Typography } from 'antd';
 import { useStoreDispatch } from '@/store';
 import { actionLogin } from '@/store/modules/user.store';
-import { FormLoginValues, PropsLogin } from '@/types';
+import { FormLoginValues, PropsLoginLoginForm } from '@/types';
 import ConfigForm from '@/components/common/config-form';
 
-const Register: FC<PropsLogin> = ({ getValue }) => {
+const LoginLoginForm: FC<PropsLoginLoginForm> = ({ getValue }) => {
   /** DisplayName */
-  Register.displayName = 'StrengthMeter';
+  LoginLoginForm.displayName = 'LoginLoginForm';
 
   /** Data */
   const dispatch = useStoreDispatch(); // 调用 store 方法
@@ -89,4 +89,4 @@ const Register: FC<PropsLogin> = ({ getValue }) => {
   );
 };
 
-export default Register;
+export default LoginLoginForm;

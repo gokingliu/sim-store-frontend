@@ -1,6 +1,8 @@
 import React, { useEffect, FC } from 'react';
-import { Col, Flex, Row } from 'antd';
-import CardBox from '@/components/business/cardbox';
+import { Flex } from 'antd';
+import HomeEcharts from '@/components/business/home/echarts';
+import HomeList from '@/components/business/home/list';
+import HomeOverView from '@/components/business/home/overview';
 import './index.less';
 import { baseEnv, WebSocketClient } from '@/http';
 import { WebSocketHandler } from '@/types';
@@ -16,7 +18,7 @@ const Home: FC = () => {
     const handler: WebSocketHandler = {
       onmessage: (res) => {
         const JSONRes = JSON.parse(res.data);
-        console.log(JSONRes);
+        return JSONRes;
       },
     };
     const webSocket = new WebSocketClient({ baseURL: `${baseEnv.ws}/QueryFriendsInfo`, handler });
@@ -32,20 +34,12 @@ const Home: FC = () => {
 
   /** ReactDOM */
   return (
-    <Flex className="home">
-      <Row className="home-overview">
-        <Col className="home-content" span={7}>
-          <CardBox title="访问总量">123</CardBox>
-        </Col>
+    <Flex className="home" vertical={true}>
+      <HomeOverView />
 
-        <Col className="home-content" span={10}>
-          <CardBox title="最新消息">123</CardBox>
-        </Col>
+      <HomeEcharts />
 
-        <Col className="home-content" span={7}>
-          <CardBox title="商品总量">123</CardBox>
-        </Col>
-      </Row>
+      <HomeList />
     </Flex>
   );
 };

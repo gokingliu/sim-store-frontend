@@ -26,6 +26,7 @@ const SiderMenu: FC<PropsSiderMenu> = () => {
     <Menu
       theme="dark"
       mode="inline"
+      defaultSelectedKeys={['sub1']}
       openKeys={openKeys}
       onOpenChange={onOpenChange}
       items={[

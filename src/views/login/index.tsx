@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { Flex, Typography } from 'antd';
-import LoginForm from '@/components/business/login/login-form';
-import RegisterForm from '@/components/business/login/register-form';
+import LoginLoginForm from '@/components/business/login/login-form';
+import LoginRegisterForm from '@/components/business/login/register-form';
 import Logo from '../../assets/img/logo.png';
 import LoginBoxBG from '../../assets/svg/login-box-bg.svg';
 import './index.less';
@@ -38,7 +38,11 @@ const Login: FunctionComponent = () => {
 
       <div className="login-box">
         <div className="login-container">
-          {loginRegister ? <RegisterForm getValue={getLoginRegister} /> : <LoginForm getValue={getLoginRegister} />}
+          {loginRegister ? (
+            <LoginRegisterForm getValue={getLoginRegister} />
+          ) : (
+            <LoginLoginForm getValue={getLoginRegister} />
+          )}
         </div>
       </div>
     </div>

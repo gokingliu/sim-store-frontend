@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { Progress } from 'antd';
 import { zxcvbn } from '@zxcvbn-ts/core';
-import { PropsStrengthMeter } from '@/types';
+import { PropsLoginStrengthMeter } from '@/types';
 
-const StrengthMeter: FC<PropsStrengthMeter> = ({ password }) => {
+const LoginStrengthMeter: FC<PropsLoginStrengthMeter> = ({ password }) => {
   /** DisplayName */
-  StrengthMeter.displayName = 'StrengthMeter';
+  LoginStrengthMeter.displayName = 'LoginStrengthMeter';
 
   /** Data */
   const { score } = zxcvbn(password);
@@ -22,4 +22,4 @@ const StrengthMeter: FC<PropsStrengthMeter> = ({ password }) => {
   return <Progress percent={percent} showInfo={false} strokeColor={strokeColor} />;
 };
 
-export default StrengthMeter;
+export default LoginStrengthMeter;
