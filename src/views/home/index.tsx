@@ -1,5 +1,6 @@
 import React, { useEffect, FC } from 'react';
 import { Flex } from 'antd';
+import { Helmet } from 'react-helmet';
 import HomeEcharts from '@/components/business/home/echarts';
 import HomeList from '@/components/business/home/list';
 import HomeOverView from '@/components/business/home/overview';
@@ -34,13 +35,20 @@ const Home: FC = () => {
 
   /** ReactDOM */
   return (
-    <Flex className="home" vertical={true}>
-      <HomeOverView />
+    <>
+      <Helmet>
+        <title>My Title</title>
+        <meta name="description" content="Helmet application" />
+      </Helmet>
 
-      <HomeEcharts />
+      <Flex className="home" vertical={true}>
+        <HomeOverView />
 
-      <HomeList />
-    </Flex>
+        <HomeEcharts />
+
+        <HomeList />
+      </Flex>
+    </>
   );
 };
 

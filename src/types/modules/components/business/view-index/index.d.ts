@@ -1,1 +1,2 @@
-export interface PropsViewIndex {}
+export * from './content';
+export * from './username';

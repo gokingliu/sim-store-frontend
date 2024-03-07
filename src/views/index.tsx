@@ -2,7 +2,8 @@ import React, { FC, useState } from 'react';
 import { Button, Layout } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import SiderMenu from '@/components/business/sider-menu';
-import ViewIndex from '@/components/business/view-index';
+import UserName from '@/components/business/view-index/username';
+import ViewContent from '@/components/business/view-index/content';
 import Logo from '../assets/img/logo.png';
 import './index.less';
 
@@ -34,9 +35,11 @@ const Index: FC = () => {
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => setCollapsed(!collapsed)}
           />
+
+          <UserName />
         </Layout.Header>
         <Layout.Content className="index-content">
-          <ViewIndex />
+          <ViewContent />
         </Layout.Content>
       </Layout>
     </Layout>
