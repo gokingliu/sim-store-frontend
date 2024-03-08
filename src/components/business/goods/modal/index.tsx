@@ -1,18 +1,21 @@
-import React, { forwardRef, useImperativeHandle, useState, FC, Ref } from 'react';
+import React, { forwardRef, useImperativeHandle, useState, useRef, ElementRef, FC, Ref, ReactNode } from 'react';
 import { Modal } from 'antd';
+import GoodsInfo from '@/components/business/goods/info';
+import GoodsEdit from '@/components/business/goods/edit';
 import { PropsGoodsModal } from '@/types';
 
 const GoodsModal: FC<PropsGoodsModal> = forwardRef(
-  ({ children, OK, Cancel }: PropsGoodsModal, ref: Ref<{ openModal: () => void }>) => {
+  ({ title }: PropsGoodsModal, ref: Ref<{ openModal: () => void }>) => {
     /** DisplayName */
     GoodsModal.displayName = 'GoodsModal';
 
-    /** 抛出组件方法 */
+    /** Throw Method */
     useImperativeHandle(ref, () => ({
       openModal,
     }));
 
     /** Data */
+    const editRef = useRef<ElementRef<typeof GoodsEdit>>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     /** Method */
@@ -20,30 +23,35 @@ const GoodsModal: FC<PropsGoodsModal> = forwardRef(
       setIsModalOpen(true);
     };
     const handleOk = () => {
-      OK();
-      setIsModalOpen(false);
+      editRef.current?.submit();
+      // setIsModalOpen(false);
     };
     const handleCancel = () => {
-      Cancel();
       setIsModalOpen(false);
     };
 
-    /** Method */
+    const childrenComp = () => {
+      switch (title) {
+        case '编辑':
+          return <GoodsEdit ref={editRef} />;
+        default:
+          return <div />;
+      }
+    };
 
     /** ReactDOM */
     return (
       <Modal
-        title="Basic Modal"
+        title={title}
         width="50%"
         maskClosable={false}
         open={isModalOpen}
         onOk={handleOk}
+        okButtonProps={{ size: 'middle' }}
         onCancel={handleCancel}
+        cancelButtonProps={{ size: 'middle' }}
       >
-        {children}
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        {childrenComp()}
       </Modal>
     );
   },
