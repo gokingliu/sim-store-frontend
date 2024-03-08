@@ -1,21 +1,21 @@
-import React, { lazy, Suspense, FunctionComponent } from 'react';
+import React, { Suspense, FunctionComponent } from 'react';
 import loadable from '@loadable/component';
 import { useRoutes, BrowserRouter, Navigate, RouteObject } from 'react-router-dom';
 
 // 页面切换 Loading
-const Loading = lazy(() => import('@/components/common/loading'));
+const Loading = loadable(() => import('@/components/common/loading'));
 // 入口页面
-const Index = lazy(() => import('@/views'));
+const Index = loadable(() => import('@/views'));
 // 首页
 const Home = loadable(() => import('@/views/home'));
 // 商品管理
-const Goods = lazy(() => import('@/views/goods'));
+const Goods = loadable(() => import('@/views/goods'));
 // 注册页面
-const Login = lazy(() => import('@/views/login'));
+const Login = loadable(() => import('@/views/login'));
 // 403 页面
-const NotAuthorized = lazy(() => import('@/views/403'));
+const NotAuthorized = loadable(() => import('@/views/403'));
 // 404 页面
-const NotFound = lazy(() => import('@/views/404'));
+const NotFound = loadable(() => import('@/views/404'));
 
 // 路由列表
 const routerList: RouteObject[] = [

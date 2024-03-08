@@ -10,7 +10,6 @@ const ViewContent: FC<PropsViewContent> = () => {
 
   /** Data */
   const [auth, setAuth] = useState(true);
-  console.log('！viewcontent 页面！');
 
   /** Life Cycle Hook */
   useEffect(() => {

@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { Button, Layout } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
-import SiderMenu from '@/components/business/sider-menu';
+import SiderMenu from '@/components/business/view-index/sider-menu';
 import UserName from '@/components/business/view-index/username';
 import ViewContent from '@/components/business/view-index/content';
 import Logo from '../assets/img/logo.png';
