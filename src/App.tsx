@@ -11,6 +11,7 @@ const App: FunctionComponent = () => (
       componentSize="large"
       theme={{
         token: {
+          borderRadius: 2,
           colorPrimary: '#0960bd',
         },
       }}

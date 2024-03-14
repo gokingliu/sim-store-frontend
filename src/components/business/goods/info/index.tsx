@@ -10,20 +10,29 @@ const GoodsInfo: FC<PropsGoodsInfo> = () => {
   const items: DescriptionsProps['items'] = [
     {
       label: '商品名称',
-      children: '移动-新尊卡',
+      children: '移动｜新尊卡',
+    },
+    {
+      label: '运营商',
+      children: '移动',
+    },
+    {
+      label: '月租',
+      children: '19元',
+    },
+    {
+      label: '归属地',
+      children: '海南',
     },
     {
       label: '年龄',
+      span: { xl: 2, xxl: 2 },
       children: '18-60岁',
     },
     {
       label: '简介',
+      span: { xl: 2, xxl: 2 },
       children: '29元135G+通话0.1/分钟',
-    },
-
-    {
-      label: '归属地',
-      children: '海南',
     },
     {
       label: '优惠期',

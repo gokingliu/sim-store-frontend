@@ -19,24 +19,17 @@ const LoginRegisterForm: FC<PropsLoginRegisterForm> = ({ getValue }) => {
 
   /** Method */
   // 表单完成
-  const onFinish = () => {
+  const onFinish = async (values: RequestRegister) => {
     try {
       setRegisterLoading(true);
-      form
-        .validateFields()
-        .then(async (values: RequestRegister) => {
-          const {
-            data: { result },
-          } = await Api.Register({ userName: values.userName, password: values.password });
-          if (!result) return Promise.reject(result);
-          setRegisterLoading(false);
-          navigate('/');
-        })
-        .catch((error) => {
-          setRegisterLoading(false);
-          message.error(error);
-        });
+      const {
+        data: { result },
+      } = await Api.Register({ userName: values.userName, password: values.password });
+      if (!result) return Promise.reject(result);
+      setRegisterLoading(false);
+      navigate('/');
     } catch (e) {
+      setRegisterLoading(false);
       console.error(e);
     }
   };

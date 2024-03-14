@@ -4,18 +4,20 @@ import { useRoutes, BrowserRouter, Navigate, RouteObject } from 'react-router-do
 
 // 页面切换 Loading
 const Loading = loadable(() => import('@/components/common/loading'));
-// 入口页面
-const Index = loadable(() => import('@/views'));
-// 首页
-const Home = loadable(() => import('@/views/home'));
-// 商品管理
-const Goods = loadable(() => import('@/views/goods'));
 // 注册页面
 const Login = loadable(() => import('@/views/login'));
 // 403 页面
 const NotAuthorized = loadable(() => import('@/views/403'));
 // 404 页面
 const NotFound = loadable(() => import('@/views/404'));
+// 入口页面
+const Index = loadable(() => import('@/views'));
+// 首页
+const Home = loadable(() => import('@/views/home'));
+// 商品管理
+const Goods = loadable(() => import('@/views/goods'));
+// 页面定制
+const Custom = loadable(() => import('@/views/custom'));
 
 // 路由列表
 const routerList: RouteObject[] = [
@@ -26,6 +28,7 @@ const routerList: RouteObject[] = [
       { index: true, element: <Navigate replace to="home" /> },
       { path: 'home', element: <Home /> },
       { path: 'goods', element: <Goods /> },
+      { path: 'custom', element: <Custom /> },
     ],
   },
   {

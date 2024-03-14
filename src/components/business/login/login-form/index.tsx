@@ -16,21 +16,14 @@ const LoginLoginForm: FC<PropsLoginLoginForm> = ({ getValue }) => {
 
   /** Method */
   // 表单完成
-  const onFinish = () => {
+  const onFinish = async (values: FormLoginValues) => {
     try {
       setLoginLoading(true);
-      form
-        .validateFields()
-        .then(async (values: FormLoginValues) => {
-          const res = await dispatch(actionLogin(values));
-          if (res) return Promise.reject(res);
-          setLoginLoading(false);
-        })
-        .catch((error) => {
-          setLoginLoading(false);
-          message.error(error);
-        });
+      const res = await dispatch(actionLogin(values));
+      if (res) return Promise.reject(res);
+      setLoginLoading(false);
     } catch (e) {
+      setLoginLoading(false);
       console.error(e);
     }
   };

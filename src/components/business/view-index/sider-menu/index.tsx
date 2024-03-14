@@ -2,7 +2,7 @@ import React, { useState, FC } from 'react';
 import { Menu, type MenuProps } from 'antd';
 import { NavLink, useLocation } from 'react-router-dom';
 import { PropsSiderMenu } from '@/types';
-import { FormatPainterOutlined, PayCircleOutlined, PieChartOutlined, ProfileOutlined } from '@ant-design/icons';
+import { FormatPainterOutlined, PieChartOutlined, ProfileOutlined } from '@ant-design/icons';
 
 const SiderMenu: FC<PropsSiderMenu> = () => {
   /** DisplayName */
@@ -22,25 +22,16 @@ const SiderMenu: FC<PropsSiderMenu> = () => {
       children: [{ key: 'goods', label: <NavLink to="goods">商品管理列表</NavLink> }],
     },
     {
-      key: 'publish',
-      label: '推广模块',
-      icon: <PayCircleOutlined />,
-      children: [{ key: 'channel', label: '推广渠道' }],
-    },
-    {
       key: 'diy',
       label: '定制中心',
       icon: <FormatPainterOutlined />,
-      children: [
-        { key: 'banner', label: '首页滚动图' },
-        { key: 'wechat', label: '客服微信' },
-      ],
+      children: [{ key: 'custom', label: <NavLink to="custom">页面定制</NavLink> }],
     },
   ];
   const location = useLocation();
   const path = location.pathname.replace('/', '') || 'home';
   const menuIndex = menuList.findIndex((item) => item.children?.some((children) => children.key === path));
-  const rootSubmenuKeys = ['home', 'manage', 'publish', 'diy'];
+  const rootSubmenuKeys = ['home', 'manage', 'diy'];
   const [openKeys, setOpenKeys] = useState([rootSubmenuKeys[menuIndex === -1 ? 0 : menuIndex]]);
 
   /** Method */

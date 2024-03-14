@@ -1,5 +1,6 @@
 import React, { useRef, useState, ElementRef, FC } from 'react';
 import { Avatar, Button, List, Skeleton } from 'antd';
+import GoodsSearch from '@/components/business/goods/search';
 import GoodsModal from '@/components/business/goods/modal';
 import './index.less';
 
@@ -23,14 +24,16 @@ const Goods: FC = () => {
   /** Life Cycle Hook */
 
   /** Method */
-  const openModal = (index: string) => {
-    setTitle(index);
+  const openModal = (name: string) => {
+    setTitle(name);
     modalRef.current?.openModal();
   };
 
   /** ReactDOM */
   return (
     <>
+      <GoodsSearch />
+
       <List
         className="goods"
         itemLayout="horizontal"

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Avatar, Button, Popover } from 'antd';
+import { Avatar, Button, Flex, Popover } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useStoreDispatch, useStoreSelector, StoreState } from '@/store';
 import { actionLogout } from '@/store/modules/user.store';
@@ -56,15 +56,15 @@ const UserName: FC<PropsUserName> = () => {
             退 出
           </Button>
         ) : (
-          <span className="buttons">
-            <Button className="button" type="link" onClick={handleLogin}>
+          <Flex vertical>
+            <Button size="middle" type="link" onClick={handleLogin}>
               登 陆
             </Button>
 
-            <Button className="button" type="link" onClick={handleLogin}>
+            <Button size="middle" type="link" onClick={handleLogin}>
               注 册
             </Button>
-          </span>
+          </Flex>
         )
       }
     >
