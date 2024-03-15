@@ -13,6 +13,7 @@ const Goods: FC = () => {
   const [initLoading, setInitLoading] = useState(false);
   const [title, setTitle] = useState('');
   const data = Array.from({ length: 20 }).map(() => ({
+    id: 1,
     name: '移动-新尊卡',
     poster: 'https://pps.1064m2m.cn/public/20240307/496bdf974fd83505144d95500e270efb.png',
     description: '29元135G+通话0.1/分钟',

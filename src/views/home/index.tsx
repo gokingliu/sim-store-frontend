@@ -1,52 +1,77 @@
-import React, { useEffect, FC } from 'react';
+import React, { useEffect, useState, FC } from 'react';
 import { Flex } from 'antd';
 import { Helmet } from 'react-helmet';
+import Api from '@/apis';
 import HomeEcharts from '@/components/business/home/echarts';
 import HomeList from '@/components/business/home/list';
 import HomeOverView from '@/components/business/home/overview';
+import { ResponseOverview, ResponseMessage, ResponseRanking } from '@/types';
 import './index.less';
-import { baseEnv, WebSocketClient } from '@/http';
-import { WebSocketHandler } from '@/types';
+
+/** Mock Data */
+import { mockOverviewData, mockMessageData, mockRankingData } from './mock.config';
 
 const Home: FC = () => {
   /** DisplayName */
   Home.displayName = 'Home';
 
   /** Data */
+  const [overviewData, setOverviewData] = useState<ResponseOverview | null>(null);
+  const [messageData, setMessageData] = useState<ResponseMessage[] | null>(null);
+  const [rankingData, setRankingData] = useState<ResponseRanking[] | null>(null);
 
   /** Life Cycle Hook */
   useEffect(() => {
-    const handler: WebSocketHandler = {
-      onmessage: (res) => {
-        const JSONRes = JSON.parse(res.data);
-        return JSONRes;
-      },
-    };
-    const webSocket = new WebSocketClient({ baseURL: `${baseEnv.ws}/QueryFriendsInfo`, handler });
-    webSocket.send('{"apis":"info"}');
-    const t = setInterval(() => {
-      webSocket.send('{"apis":"info"}');
-    }, 1000);
-    return () => {
-      webSocket.close();
-      clearInterval(t);
-    };
+    getOverview();
+    getMessage();
+    PostRanking(10);
   }, []);
+
+  /** Method */
+  const getOverview = () => {
+    Api.QueryOverview()
+      .then((res) => {
+        setOverviewData(res.data.result);
+      })
+      .catch(() => {
+        // TODO 联调后 value 改为 null
+        setOverviewData(mockOverviewData);
+      });
+  };
+  const getMessage = () => {
+    Api.QueryMessage()
+      .then((res) => {
+        setMessageData(res.data.result);
+      })
+      .catch(() => {
+        // TODO 联调后 value 改为 null
+        setMessageData(mockMessageData);
+      });
+  };
+  const PostRanking = (number: number) => {
+    Api.PostRanking(number)
+      .then((res) => {
+        setRankingData(res.data.result);
+      })
+      .catch(() => {
+        // TODO 联调后 value 改为 null
+        setRankingData(mockRankingData);
+      });
+  };
 
   /** ReactDOM */
   return (
     <>
       <Helmet>
-        <title>My Title</title>
-        <meta name="description" content="Helmet application" />
+        <title>数据中心 - SIM Store</title>
       </Helmet>
 
       <Flex className="home" vertical={true}>
-        <HomeOverView />
+        <HomeOverView visit={overviewData?.visit} goods={overviewData?.goods} message={messageData} />
 
-        <HomeEcharts />
+        <HomeEcharts visit={overviewData?.visit} />
 
-        <HomeList />
+        <HomeList ranking={rankingData} />
       </Flex>
     </>
   );
