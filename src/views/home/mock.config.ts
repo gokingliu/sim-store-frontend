@@ -1,4 +1,4 @@
-export const mockOverviewData = {
+export const MockOverviewData = {
   visit: {
     total: 4890,
     days: ['2024-03-09', '2024-03-10', '2024-03-11', '2024-03-12', '2024-03-13', '2024-03-14', '2024-03-15'],
@@ -10,7 +10,7 @@ export const mockOverviewData = {
   },
 };
 
-export const mockMessageData = [
+export const MockMessageData = [
   { id: 1, title: '新年快乐' },
   { id: 2, title: '系统通知' },
   { id: 3, title: '产品下架通知 - 2024.03.10' },
@@ -18,7 +18,7 @@ export const mockMessageData = [
   { id: 5, title: '产品下架通知 - 2024.01.15' },
 ];
 
-export const mockRankingData = [
+export const MockRankingData = [
   {
     id: 0,
     name: '电信 - 极星卡',

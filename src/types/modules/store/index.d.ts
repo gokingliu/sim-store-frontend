@@ -1,5 +1,13 @@
-export interface StoreModalState {
-  modal: boolean;
+export interface StoreDataItemState {
+  label: string;
+  value: number | string;
+}
+
+export interface StoreDataState {
+  operator: StoreDataItemState[];
+  location: StoreDataItemState[];
+  discount: StoreDataItemState[];
+  fee: StoreDataItemState[];
 }
 
 export interface StoreUserState {

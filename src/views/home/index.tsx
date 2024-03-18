@@ -9,7 +9,7 @@ import { ResponseOverview, ResponseMessage, ResponseRanking } from '@/types';
 import './index.less';
 
 /** Mock Data */
-import { mockOverviewData, mockMessageData, mockRankingData } from './mock.config';
+import { MockOverviewData, MockMessageData, MockRankingData } from './mock.config';
 
 const Home: FC = () => {
   /** DisplayName */
@@ -24,7 +24,7 @@ const Home: FC = () => {
   useEffect(() => {
     getOverview();
     getMessage();
-    PostRanking(10);
+    postRanking(10);
   }, []);
 
   /** Method */
@@ -35,7 +35,7 @@ const Home: FC = () => {
       })
       .catch(() => {
         // TODO 联调后 value 改为 null
-        setOverviewData(mockOverviewData);
+        setOverviewData(MockOverviewData);
       });
   };
   const getMessage = () => {
@@ -45,17 +45,17 @@ const Home: FC = () => {
       })
       .catch(() => {
         // TODO 联调后 value 改为 null
-        setMessageData(mockMessageData);
+        setMessageData(MockMessageData);
       });
   };
-  const PostRanking = (number: number) => {
+  const postRanking = (number: number) => {
     Api.PostRanking(number)
       .then((res) => {
         setRankingData(res.data.result);
       })
       .catch(() => {
         // TODO 联调后 value 改为 null
-        setRankingData(mockRankingData);
+        setRankingData(MockRankingData);
       });
   };
 

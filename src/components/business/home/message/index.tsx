@@ -2,6 +2,8 @@ import React, { FC, forwardRef, Ref, useImperativeHandle, useState } from 'react
 import { Descriptions, Modal, type DescriptionsProps } from 'antd';
 import Api from '@/apis';
 import { PropsHomeMessage, ResponseMessageInfo } from '@/types';
+
+/** Mock Data */
 import { MockMessageData } from './mock.config';
 
 const HomeMessage: FC<PropsHomeMessage> = forwardRef(({ id }, ref: Ref<{ checkMessage: () => void }>) => {
@@ -52,6 +54,7 @@ const HomeMessage: FC<PropsHomeMessage> = forwardRef(({ id }, ref: Ref<{ checkMe
   /** ReactDOM */
   return (
     <Modal
+      destroyOnClose
       title="消息"
       width="30%"
       open={isModalOpen}

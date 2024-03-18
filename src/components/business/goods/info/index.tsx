@@ -1,81 +1,83 @@
-import React, { FC } from 'react';
-import { Descriptions, type DescriptionsProps } from 'antd';
-import { PropsGoodsInfo } from '@/types';
+import React, { useEffect, useState, FC } from 'react';
+import { Descriptions, Skeleton, type DescriptionsProps } from 'antd';
+import Api from '@/apis';
+import { useStoreDispatch } from '@/store';
+import { actionData } from '@/store/modules/data.store';
+import { PropsGoodsInfo, ResponseGoodsListItem } from '@/types';
+import './index.less';
 
-const GoodsInfo: FC<PropsGoodsInfo> = () => {
+/** Mock Data */
+import { MockGoodsListItemData } from './mock.config';
+
+const GoodsInfo: FC<PropsGoodsInfo> = ({ id }) => {
   /** DisplayName */
   GoodsInfo.displayName = 'GoodsInfo';
 
   /** Data */
-  const items: DescriptionsProps['items'] = [
-    {
-      label: '商品名称',
-      children: '移动｜新尊卡',
-    },
-    {
-      label: '运营商',
-      children: '移动',
-    },
-    {
-      label: '月租',
-      children: '19元',
-    },
-    {
-      label: '归属地',
-      children: '海南',
-    },
-    {
-      label: '年龄',
-      span: { xl: 2, xxl: 2 },
-      children: '18-60岁',
-    },
-    {
-      label: '简介',
-      span: { xl: 2, xxl: 2 },
-      children: '29元135G+通话0.1/分钟',
-    },
-    {
-      label: '优惠期',
-      span: { xl: 2, xxl: 2 },
-      children: '长期有效',
-    },
-    {
-      label: '商品链接',
-      span: { xl: 2, xxl: 2 },
-      children: (
-        <a href="https://www.baidu.com/" target="_blank" rel="noreferrer">
-          https://www.baidu.com/
-        </a>
-      ),
-    },
-    {
-      label: '套餐内容',
-      span: { xs: 1, sm: 2, md: 3, lg: 3, xl: 2, xxl: 2 },
-      children: (
-        <>
-          原月租:29元=30G定向；
-          <br />
-          优惠后:29元=155G通用+30定向+100分钟通话
-          <br />
-          套外流量5元/G，套外语音0.1元/分钟，短信0.1/一条。
-        </>
-      ),
-    },
-    {
-      label: '优惠详情',
-      span: { xs: 1, sm: 2, md: 3, lg: 3, xl: 2, xxl: 2 },
-      children: (
-        <>
-          激活时强充100元，才可享受以下优惠；
-          <br />
-          1、激活后48小时内到账155G通用+100分钟（赠送12个月），到期自动续约；
-        </>
-      ),
-    },
-  ];
+  const dispatch = useStoreDispatch(); // 调用 store 方法
+  const [goodsListItem, setGoodsListItem] = useState<DescriptionsProps['items']>();
+
+  /** Life Cycle Hook */
+  useEffect(() => {
+    const handleData = (goodsListItem: ResponseGoodsListItem): DescriptionsProps['items'] => {
+      const data = {
+        ...goodsListItem,
+        operator: dispatch(actionData({ key: 'operator', value: goodsListItem.operator })),
+        location: dispatch(actionData({ key: 'location', value: goodsListItem.location })),
+        discount: dispatch(actionData({ key: 'discount', value: goodsListItem.discount })),
+      };
+
+      return [
+        { label: '商品名称', children: data.name },
+        { label: '运营商', children: data.operator },
+        { label: '月租', children: data.fee },
+        { label: '归属地', children: data.location },
+        { label: '年龄', span: { xl: 2, xxl: 2 }, children: data.age },
+        { label: '简介', span: { xl: 2, xxl: 2 }, children: data.description },
+        { label: '优惠期', span: { xl: 2, xxl: 2 }, children: data.discount },
+        {
+          label: '商品链接',
+          span: { xl: 2, xxl: 2 },
+          children: (
+            <a href={data.url} target="_blank" rel="noreferrer">
+              {data.url}
+            </a>
+          ),
+        },
+        {
+          label: '套餐内容',
+          span: { xs: 1, sm: 2, md: 3, lg: 3, xl: 2, xxl: 2 },
+          children: <span className="white-space"> {data.combo.replaceAll('；', '\n')} </span>,
+        },
+        {
+          label: '优惠详情',
+          span: { xs: 1, sm: 2, md: 3, lg: 3, xl: 2, xxl: 2 },
+          children: <span className="white-space"> {data.details.replaceAll('；', '\n')} </span>,
+        },
+      ];
+    };
+
+    Api.QueryGoodsListItem(id)
+      .then((res) => {
+        setGoodsListItem(handleData(res.data.result));
+      })
+      .catch(() => {
+        // TODO 联调后 value 改为 null
+        setGoodsListItem(handleData(MockGoodsListItemData));
+      });
+  }, [id, dispatch]);
 
   /** ReactDOM */
-  return <Descriptions bordered size="small" column={{ xs: 1, sm: 2, md: 3, lg: 3, xl: 4, xxl: 4 }} items={items} />;
+  return (
+    <Skeleton className="skeleton" loading={!goodsListItem} active paragraph={{ rows: 5 }}>
+      <Descriptions
+        bordered
+        size="small"
+        column={{ xs: 1, sm: 2, md: 3, lg: 3, xl: 4, xxl: 4 }}
+        items={goodsListItem}
+      />
+    </Skeleton>
+  );
 };
 
 export default GoodsInfo;

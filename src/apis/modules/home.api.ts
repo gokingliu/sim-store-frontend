@@ -15,28 +15,28 @@ const Home = {
    * @description 获取访问量、商品量
    */
   QueryOverview(): Promise<AxiosResponse<AxiosResponseData<ResponseOverview>>> {
-    return http.get('/overview');
+    return http.get('/Overview');
   },
 
   /**
    * @description 获取系统消息
    */
   QueryMessage(): Promise<AxiosResponse<AxiosResponseData<ResponseMessage[]>>> {
-    return http.get('/message');
+    return http.get('/Message');
   },
 
   /**
    * @description 获取系统消息详情
    */
   PostMessageInfo(id: number): Promise<AxiosResponse<AxiosResponseData<ResponseMessageInfo>>> {
-    return http.post('/message-info', { id });
+    return http.post('/MessageInfo', { id });
   },
 
   /**
    * @description 获取商品排行榜
    */
   PostRanking(number: number): Promise<AxiosResponse<AxiosResponseData<ResponseRanking[]>>> {
-    return http.post('/ranking', { number });
+    return http.post('/Ranking', { number });
   },
 
   /**

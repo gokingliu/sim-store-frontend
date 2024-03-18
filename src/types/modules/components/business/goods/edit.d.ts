@@ -1,18 +1,11 @@
 import { Ref } from 'react';
+import { ResponseGoodsListItem } from '@/types';
 
 export interface PropsGoodsEdit {
   ref: Ref<{ submit: () => void }>;
+  loadingFC: (loading: boolean) => void;
   closeModal: () => void;
+  id: number;
 }
 
-export interface GoodsEditFormValue {
-  name: string;
-  description: string;
-  poster: string;
-  age: string;
-  location: string;
-  discount: string;
-  combo: string;
-  details: string;
-  url: string;
-}
+export interface GoodsEditFormValue extends ResponseGoodsListItem {}

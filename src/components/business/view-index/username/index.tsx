@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-import { Avatar, Button, Flex, Popover } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { Avatar, Button, Popover } from 'antd';
 import { useStoreDispatch, useStoreSelector, StoreState } from '@/store';
 import { actionLogout } from '@/store/modules/user.store';
 import { PropsUserName } from '@/types';
@@ -25,7 +24,6 @@ const UserName: FC<PropsUserName> = () => {
   ]; // 颜色值数组
   const { userName, token } = useStoreSelector((state: StoreState) => state.user); // 从 store 中获取 userName token
   const dispatch = useStoreDispatch(); // 调用 store 方法
-  const navigate = useNavigate(); // 路由跳转
 
   /** Method */
   // 获取显示用户名
@@ -39,10 +37,6 @@ const UserName: FC<PropsUserName> = () => {
       return colorList[0];
     }
   };
-  // 登陆弹框
-  const handleLogin = () => {
-    navigate('/login');
-  };
 
   /** ReactDOM */
   return (
@@ -51,21 +45,9 @@ const UserName: FC<PropsUserName> = () => {
       placement="bottom"
       getPopupContainer={() => document.getElementById('TopBar') as HTMLElement}
       content={
-        token ? (
-          <Button className="button" type="link" onClick={() => dispatch(actionLogout())}>
-            退 出
-          </Button>
-        ) : (
-          <Flex vertical>
-            <Button size="middle" type="link" onClick={handleLogin}>
-              登 陆
-            </Button>
-
-            <Button size="middle" type="link" onClick={handleLogin}>
-              注 册
-            </Button>
-          </Flex>
-        )
+        <Button className="button" type="link" size="small" onClick={() => dispatch(actionLogout())}>
+          退 出
+        </Button>
       }
     >
       <Avatar className="top-bar__avatar" style={{ backgroundColor: avatarColor(userName) }} gap={6} size={32}>

@@ -1,67 +1,66 @@
-import React, { useRef, useState, ElementRef, FC } from 'react';
-import { Avatar, Button, List, Skeleton } from 'antd';
+import React, { useCallback, useEffect, useRef, useState, ElementRef, FC } from 'react';
+import Api from '@/apis';
 import GoodsSearch from '@/components/business/goods/search';
+import GoodsList from '@/components/business/goods/list';
 import GoodsModal from '@/components/business/goods/modal';
-import './index.less';
+import { RequestGoodsList, ResponseGoodsList } from '@/types';
+
+/** Mock Data */
+import { MockGoodsListData } from './mock.config';
 
 const Goods: FC = () => {
   /** DisplayName */
   Goods.displayName = 'Goods';
 
   /** Data */
+  const defaultSearchParams = {
+    operator: 0,
+    location: '',
+    discount: 0,
+    fee: 0,
+  };
   const modalRef = useRef<ElementRef<typeof GoodsModal>>(null);
-  const [initLoading, setInitLoading] = useState(false);
-  const [title, setTitle] = useState('');
-  const data = Array.from({ length: 20 }).map(() => ({
-    id: 1,
-    name: '移动-新尊卡',
-    poster: 'https://pps.1064m2m.cn/public/20240307/496bdf974fd83505144d95500e270efb.png',
-    description: '29元135G+通话0.1/分钟',
-    discount: 0, // 0: 长期有效, 1: 到期续约, 2: 两年优惠, 3: 一年优惠
-    place: 'HI', // HI: 海南
-    url: 'https://hk.yunhaoka.cn/#/pages/goods/details?goods_id=72870872&share_id=238161&channel=1826&type=10',
-  }));
+  const [goodsItem, setGoodsItem] = useState<{ id: number; button: string; name: string }>({
+    id: 0,
+    button: '',
+    name: '',
+  });
+  const [searchParams, setSearchParams] = useState<RequestGoodsList>({ ...defaultSearchParams });
+  const [goodsList, setGoodsList] = useState<ResponseGoodsList[] | null>(null);
 
   /** Life Cycle Hook */
+  useEffect(() => {
+    search(searchParams);
+  }, []);
 
   /** Method */
-  const openModal = (name: string) => {
-    setTitle(name);
+  const handleListItem = (id: number, button: string, name: string) => {
+    setGoodsItem({ id, button, name });
     modalRef.current?.openModal();
   };
+  const search = useCallback(
+    (values: RequestGoodsList) => {
+      setSearchParams(values);
+      Api.PostGoodsList(searchParams)
+        .then((res) => {
+          setGoodsList(res.data.result);
+        })
+        .catch(() => {
+          // TODO 联调后 value 改为 null
+          setGoodsList(MockGoodsListData);
+        });
+    },
+    [searchParams],
+  );
 
   /** ReactDOM */
   return (
     <>
-      <GoodsSearch />
+      <GoodsSearch add={handleListItem} search={search} />
 
-      <List
-        className="goods"
-        itemLayout="horizontal"
-        dataSource={data}
-        renderItem={(item) => (
-          <List.Item>
-            <Skeleton avatar={{ shape: 'square', size: 96 }} title={false} loading={initLoading} active>
-              <List.Item.Meta
-                avatar={<Avatar shape="square" size={96} src={item.poster} />}
-                title={
-                  <a href={item.url} target="_blank" rel="noreferrer">
-                    {item.name}
-                  </a>
-                }
-                description={item.description}
-              />
-              {[{ name: '详情' }, { name: '下架' }, { name: '编辑' }].map((item, index) => (
-                <Button key={index} type="link" size="small" onClick={() => openModal(item.name)}>
-                  {item.name}
-                </Button>
-              ))}
-            </Skeleton>
-          </List.Item>
-        )}
-      />
+      <GoodsList goodsList={goodsList} handleListItem={handleListItem} />
 
-      <GoodsModal ref={modalRef} title={title} />
+      <GoodsModal ref={modalRef} goodsItem={goodsItem} />
     </>
   );
 };

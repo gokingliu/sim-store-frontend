@@ -3,5 +3,9 @@ import { Ref } from 'react';
 export interface PropsGoodsRemoved {
   ref: Ref<{ post: () => void }>;
   closeModal: () => void;
-  name: string;
+  loadingFC: (loading: boolean) => void;
+  data: {
+    id: number;
+    name: string;
+  };
 }

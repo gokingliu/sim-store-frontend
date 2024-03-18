@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { Col, List, Row } from 'antd';
-import { PropsHomeList } from '@/types';
+import { Col, List, Row, Skeleton } from 'antd';
+import { PropsHomeList, ResponseRanking } from '@/types';
 import CardBox from '@/components/common/cardbox';
 import './index.less';
 
@@ -10,15 +10,15 @@ const HomeList: FC<PropsHomeList> = ({ ranking }) => {
 
   /** ReactDOM */
   return (
-    ranking && (
-      <Row className="home-list">
-        <Col className="home-content" span={24}>
-          <CardBox title="产品排行分析">
-            <div className="list-box">
+    <Row className="home-list">
+      <Col className="home-content" span={24}>
+        <CardBox title="产品排行分析">
+          <div className="list-box">
+            <Skeleton className="skeleton" loading={!ranking?.length} active paragraph={{ rows: 15 }}>
               <List
                 itemLayout="vertical"
                 size="small"
-                dataSource={ranking}
+                dataSource={ranking as ResponseRanking[]}
                 renderItem={(item) => (
                   <List.Item key={item.id} extra={<img width={100} alt="poster" src={item.poster} />}>
                     <List.Item.Meta
@@ -31,11 +31,11 @@ const HomeList: FC<PropsHomeList> = ({ ranking }) => {
                   </List.Item>
                 )}
               />
-            </div>
-          </CardBox>
-        </Col>
-      </Row>
-    )
+            </Skeleton>
+          </div>
+        </CardBox>
+      </Col>
+    </Row>
   );
 };
 

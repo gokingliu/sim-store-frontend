@@ -2,7 +2,11 @@ import { ReactNode, Ref } from 'react';
 
 export interface PropsGoodsModal {
   ref: Ref<{ openModal: () => void }>;
-  title: string;
+  goodsItem: {
+    id: number;
+    button: string;
+    name: string;
+  };
 }
 
 export interface GoodsModalConfig {

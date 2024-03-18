@@ -1,41 +1,80 @@
-import React, { forwardRef, useImperativeHandle, FC, Ref } from 'react';
-import { Form, Input, message, Select } from 'antd';
-import { PropsGoodsEdit, GoodsEditFormValue } from '@/types';
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState, FC, Ref } from 'react';
+import { Form, Input, Select } from 'antd';
+import Api from '@/apis';
+import store from '@/store';
 import ConfigForm from '@/components/common/config-form';
+import { PropsGoodsEdit, GoodsEditFormValue } from '@/types';
 
-const GoodsEdit: FC<PropsGoodsEdit> = forwardRef(({ closeModal }: PropsGoodsEdit, ref: Ref<{ submit: () => void }>) => {
-  /** DisplayName */
-  GoodsEdit.displayName = 'GoodsEdit';
+/** Mock Data */
+import { MockGoodsListItemData } from '../info/mock.config';
 
-  /** Throw Method */
-  useImperativeHandle(ref, () => ({
-    submit,
-  }));
+const GoodsEdit: FC<PropsGoodsEdit> = forwardRef(
+  ({ id, loadingFC, closeModal }: PropsGoodsEdit, ref: Ref<{ submit: () => void }>) => {
+    /** DisplayName */
+    GoodsEdit.displayName = 'GoodsEdit';
 
-  /** Data */
-  const [form] = Form.useForm(); // 表单 Ref
-  const [messageApi, contextHolder] = message.useMessage();
+    /** Throw Method */
+    useImperativeHandle(ref, () => ({
+      submit,
+    }));
 
-  /** Method */
-  const submit = () => {
-    form.submit();
-  };
-  const onFinish = (value: GoodsEditFormValue) => {
-    try {
-      console.log(value);
-      closeModal();
-    } catch (e) {
-      console.error(e);
-    }
-  };
+    /** Data */
+    const storeData = store.getState().data;
+    const [form] = Form.useForm(); // 表单 Ref
+    const initialValues = useRef<GoodsEditFormValue>();
+    const [disabled, setDisabled] = useState(false);
 
-  /** ReactDOM */
-  return (
-    <>
-      {contextHolder}
+    /** Life Cycle Hook */
+    useEffect(() => {
+      id &&
+        Api.QueryGoodsListItem(id)
+          .then((res) => {
+            initialValues.current = res.data.result;
+            form.setFieldsValue(initialValues.current);
+          })
+          .catch(() => {
+            // TODO 联调后 value 改为 null
+            initialValues.current = MockGoodsListItemData;
+            form.setFieldsValue(initialValues.current);
+          });
+    }, [id, form]);
+
+    /** Method */
+    const restForm = () => {
+      loadingFC(false);
+      setDisabled(false);
+    };
+    const submit = () => {
+      setDisabled(true);
+      form.submit();
+    };
+    const onFinish = (value: GoodsEditFormValue) => {
+      console.log(222222);
+      try {
+        Api.PostGoodsListItem(value)
+          .then((res) => {
+            if (res.data.code) closeModal();
+          })
+          .catch(() => {
+            // TODO
+          })
+          .finally(() => {
+            restForm();
+          });
+      } catch (e) {
+        restForm();
+      }
+    };
+    const onFinishFailed = () => {
+      restForm();
+    };
+
+    /** ReactDOM */
+    return (
       <ConfigForm
         formConfig={{
           form,
+          disabled,
           name: 'goods-edit',
           className: 'goods-edit',
           labelAlign: 'left',
@@ -43,7 +82,7 @@ const GoodsEdit: FC<PropsGoodsEdit> = forwardRef(({ closeModal }: PropsGoodsEdit
           wrapperCol: { span: 20 },
           size: 'middle',
           onFinish,
-          onFinishFailed: () => messageApi.error('请正确填写用户名和密码！'),
+          onFinishFailed,
         }}
         formItemConfigs={[
           {
@@ -56,31 +95,13 @@ const GoodsEdit: FC<PropsGoodsEdit> = forwardRef(({ closeModal }: PropsGoodsEdit
             label: '运营商',
             name: 'operator',
             rules: [{ required: true, message: '请选择运营商' }],
-            children: (
-              <Select
-                options={[
-                  { value: 'jack', label: 'Jack' },
-                  { value: 'lucy', label: 'Lucy' },
-                  { value: 'Yiminghe', label: 'yiminghe' },
-                  { value: 'disabled', label: 'Disabled' },
-                ]}
-              />
-            ),
+            children: <Select options={storeData.operator} placeholder="请选择运营商" />,
           },
           {
             label: '月租',
             name: 'fee',
             rules: [{ required: true, message: '请选择月租' }],
-            children: (
-              <Select
-                options={[
-                  { value: 'jack', label: 'Jack' },
-                  { value: 'lucy', label: 'Lucy' },
-                  { value: 'Yiminghe', label: 'yiminghe' },
-                  { value: 'disabled', label: 'Disabled' },
-                ]}
-              />
-            ),
+            children: <Select options={storeData.fee} placeholder="请选择月租" />,
           },
           {
             label: '简介',
@@ -104,31 +125,13 @@ const GoodsEdit: FC<PropsGoodsEdit> = forwardRef(({ closeModal }: PropsGoodsEdit
             label: '归属地',
             name: 'location',
             rules: [{ required: true, message: '请选择归属地' }],
-            children: (
-              <Select
-                options={[
-                  { value: 'jack', label: 'Jack' },
-                  { value: 'lucy', label: 'Lucy' },
-                  { value: 'Yiminghe', label: 'yiminghe' },
-                  { value: 'disabled', label: 'Disabled' },
-                ]}
-              />
-            ),
+            children: <Select options={storeData.location} placeholder="请选择归属地" />,
           },
           {
             label: '优惠期',
             name: 'discount',
             rules: [{ required: true, message: '请选择优惠期' }],
-            children: (
-              <Select
-                options={[
-                  { value: 'jack', label: 'Jack' },
-                  { value: 'lucy', label: 'Lucy' },
-                  { value: 'Yiminghe', label: 'yiminghe' },
-                  { value: 'disabled', label: 'Disabled' },
-                ]}
-              />
-            ),
+            children: <Select options={storeData.discount} placeholder="请选择优惠期" />,
           },
           {
             label: '套餐内容',
@@ -150,8 +153,8 @@ const GoodsEdit: FC<PropsGoodsEdit> = forwardRef(({ closeModal }: PropsGoodsEdit
           },
         ]}
       />
-    </>
-  );
-});
+    );
+  },
+);
 
 export default GoodsEdit;

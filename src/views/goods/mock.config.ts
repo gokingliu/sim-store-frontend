@@ -1,0 +1,58 @@
+export const MockGoodsListData = [
+  {
+    id: 1,
+    name: '移动｜新尊卡',
+    poster: 'https://pps.1064m2m.cn/public/20240307/496bdf974fd83505144d95500e270efb.png',
+    description: '29元135G+通话0.1/分钟',
+    url: 'https://hk.yunhaoka.cn/#/pages/goods/details?goods_id=72870872&share_id=238161&channel=1826&type=10',
+  },
+  {
+    id: 2,
+    name: '联通｜新尊卡',
+    poster: 'https://pps.1064m2m.cn/public/20240307/496bdf974fd83505144d95500e270efb.png',
+    description: '29元135G+通话0.1/分钟',
+    url: 'https://hk.yunhaoka.cn/#/pages/goods/details?goods_id=72870872&share_id=238161&channel=1826&type=10',
+  },
+  {
+    id: 3,
+    name: '移动｜新尊卡',
+    poster: 'https://pps.1064m2m.cn/public/20240307/496bdf974fd83505144d95500e270efb.png',
+    description: '29元135G+通话0.1/分钟',
+    url: 'https://hk.yunhaoka.cn/#/pages/goods/details?goods_id=72870872&share_id=238161&channel=1826&type=10',
+  },
+  {
+    id: 4,
+    name: '移动｜新尊卡',
+    poster: 'https://pps.1064m2m.cn/public/20240307/496bdf974fd83505144d95500e270efb.png',
+    description: '29元135G+通话0.1/分钟',
+    url: 'https://hk.yunhaoka.cn/#/pages/goods/details?goods_id=72870872&share_id=238161&channel=1826&type=10',
+  },
+  {
+    id: 5,
+    name: '移动｜新尊卡',
+    poster: 'https://pps.1064m2m.cn/public/20240307/496bdf974fd83505144d95500e270efb.png',
+    description: '29元135G+通话0.1/分钟',
+    url: 'https://hk.yunhaoka.cn/#/pages/goods/details?goods_id=72870872&share_id=238161&channel=1826&type=10',
+  },
+  {
+    id: 6,
+    name: '移动｜新尊卡',
+    poster: 'https://pps.1064m2m.cn/public/20240307/496bdf974fd83505144d95500e270efb.png',
+    description: '29元135G+通话0.1/分钟',
+    url: 'https://hk.yunhaoka.cn/#/pages/goods/details?goods_id=72870872&share_id=238161&channel=1826&type=10',
+  },
+  {
+    id: 7,
+    name: '移动｜新尊卡',
+    poster: 'https://pps.1064m2m.cn/public/20240307/496bdf974fd83505144d95500e270efb.png',
+    description: '29元135G+通话0.1/分钟',
+    url: 'https://hk.yunhaoka.cn/#/pages/goods/details?goods_id=72870872&share_id=238161&channel=1826&type=10',
+  },
+  {
+    id: 8,
+    name: '移动｜新尊卡',
+    poster: 'https://pps.1064m2m.cn/public/20240307/496bdf974fd83505144d95500e270efb.png',
+    description: '29元135G+通话0.1/分钟',
+    url: 'https://hk.yunhaoka.cn/#/pages/goods/details?goods_id=72870872&share_id=238161&channel=1826&type=10',
+  },
+];

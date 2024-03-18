@@ -1,1 +1,3 @@
-export interface PropsGoodsInfo {}
+export interface PropsGoodsInfo {
+  id: number;
+}

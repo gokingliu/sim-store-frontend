@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, FC } from 'react';
-import { Col, Row } from 'antd';
+import { Col, Row, Skeleton } from 'antd';
 import { cloneDeep, debounce, type DebouncedFunc } from 'lodash-es';
 import * as echarts from 'echarts/core';
 import { LineChart } from 'echarts/charts';
@@ -48,10 +48,10 @@ const HomeEcharts: FC<PropsHomeEcharts> = ({ visit }) => {
 
   /** ReactDOM */
   return (
-    <Row style={{ marginTop: '16px' }}>
+    <Row className="echarts">
       <Col span={24}>
         <CardBox title="访问量分析">
-          <div ref={echartsDOM} className="echarts" />
+          {visit ? <div ref={echartsDOM} className="echarts-dom" /> : <Skeleton active paragraph={{ rows: 5 }} />}
         </CardBox>
       </Col>
     </Row>

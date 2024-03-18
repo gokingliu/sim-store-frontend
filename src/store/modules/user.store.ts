@@ -1,5 +1,5 @@
 import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
-import api from '@/apis';
+import Api from '@/apis';
 import { StoreLoginAction, StoreUserState } from '@/types';
 
 const UserSlice = createSlice({
@@ -86,7 +86,7 @@ const actionLogin =
     try {
       const {
         data: { code, result, msg },
-      } = await api.Login({ userName: payload.userName, password: payload.password });
+      } = await Api.Login({ userName: payload.userName, password: payload.password });
       if (code === 0 && result?.token) return commitActionUserState(dispatch, result.token, payload.remember);
       return msg;
     } catch (e) {

@@ -1,10 +1,10 @@
 import React, { forwardRef, useImperativeHandle, useState, FC, Ref } from 'react';
 import { Form, Input, Modal } from 'antd';
-import { GoodsSearchForm, PropsCustomEdit } from '@/types';
+import { PropsCustomEdit } from '@/types';
 import ConfigForm from '@/components/common/config-form';
 import './index.less';
 
-const CustomEdit: FC<PropsCustomEdit> = forwardRef((props, ref: Ref<{ openModal: () => void }>) => {
+const CustomEdit: FC<PropsCustomEdit> = forwardRef(({}, ref: Ref<{ openModal: () => void }>) => {
   /** DisplayName */
   CustomEdit.displayName = 'CustomEdit';
 
@@ -18,8 +18,6 @@ const CustomEdit: FC<PropsCustomEdit> = forwardRef((props, ref: Ref<{ openModal:
   const [form] = Form.useForm(); // 表单 Ref
   const { TextArea } = Input;
 
-  /** Life Cycle Hook */
-
   /** Method */
   const openModal = () => {
     setIsModalOpen(true);
@@ -30,13 +28,14 @@ const CustomEdit: FC<PropsCustomEdit> = forwardRef((props, ref: Ref<{ openModal:
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const onFinish = (values: GoodsSearchForm) => {
+  const onFinish = (values: null) => {
     console.log('Finish:', values);
   };
 
   /** ReactDOM */
   return (
     <Modal
+      destroyOnClose
       title="编辑"
       width="30%"
       maskClosable={false}
