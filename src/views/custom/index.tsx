@@ -1,8 +1,13 @@
-import React, { ElementRef, FC, useRef } from 'react';
+import React, { useEffect, useRef, useState, ElementRef, FC } from 'react';
 import { Button, Descriptions, Flex, type DescriptionsProps } from 'antd';
 import { Helmet } from 'react-helmet';
+import Api from '@/apis';
 import CustomEdit from '@/components/business/custom/edit';
+import { ResponseCustomInfo } from '@/types';
 import './index.less';
+
+/** Mock Data */
+import { MockCustomInfoData } from './mock.config';
 
 const Custom: FC = () => {
   /** DisplayName */
@@ -10,39 +15,48 @@ const Custom: FC = () => {
 
   /** Data */
   const editRef = useRef<ElementRef<typeof CustomEdit>>(null);
-  const items: DescriptionsProps['items'] = [
-    {
-      label: '微信号',
-      children: 'Go886567',
-    },
-    {
-      label: '滚屏文字',
-      children:
-        'span 是 Description.Item 的数量。 span={2} 会占用两个 DescriptionItem 的宽度。当同时配置 style 和 labelStyle（或 contentStyle）时，两者会同时作用。样式冲突时，后者会覆盖前者',
-    },
-    {
-      label: '头图',
-      children: (
-        <>
-          <img
-            width={470}
-            style={{ marginRight: '16px' }}
-            alt="logo"
-            src="https://simhaoka.com/profile/upload/comm/seller_benner.png"
-          />
-          <img
-            width={470}
-            style={{ marginRight: '16px' }}
-            alt="logo"
-            src="https://xddhaoka.com/profile/upload/2023/06/01/default1.png"
-          />
-          <img width={470} alt="logo" src="https://xddhaoka.com/profile/upload/2023/06/01/default2.png" />
-        </>
-      ),
-    },
-  ];
+  const customInfoData = useRef<ResponseCustomInfo>();
+  const [customInfo, setCustomInfo] = useState<DescriptionsProps['items']>();
 
   /** Life Cycle Hook */
+  useEffect(() => {
+    Api.GetCustomInfo()
+      .then((res) => {
+        customInfoData.current = res.data.result;
+        setCustomInfo([
+          { label: '微信号', children: res.data.result.wechat },
+          { label: '滚屏文字', children: res.data.result.info },
+          {
+            label: '头图',
+            children: (
+              <>
+                {res.data.result.banner.split('\n').map((element, index) => (
+                  <img key={index} width={400} style={{ marginRight: '16px' }} src={element} alt="banner" />
+                ))}
+              </>
+            ),
+          },
+        ]);
+      })
+      .catch(() => {
+        // TODO 联调后 value 改为 null
+        customInfoData.current = MockCustomInfoData;
+        setCustomInfo([
+          { label: '微信号', children: MockCustomInfoData.wechat },
+          { label: '滚屏文字', children: MockCustomInfoData.info },
+          {
+            label: '头图',
+            children: (
+              <>
+                {MockCustomInfoData.banner.split('\n').map((element, index) => (
+                  <img key={index} width={400} style={{ marginRight: '16px' }} src={element} alt="banner" />
+                ))}
+              </>
+            ),
+          },
+        ]);
+      });
+  }, []);
 
   /** Method */
   const openModal = () => {
@@ -56,13 +70,13 @@ const Custom: FC = () => {
         <title>页面定制 - SIM Store</title>
       </Helmet>
 
-      <Descriptions bordered column={1} layout="vertical" size="small" items={items} />
+      <Descriptions bordered column={1} layout="vertical" size="small" items={customInfo} />
 
       <Button className="button" type="primary" size="middle" onClick={openModal}>
         修改
       </Button>
 
-      <CustomEdit ref={editRef} />
+      <CustomEdit ref={editRef} info={customInfoData} />
     </Flex>
   );
 };

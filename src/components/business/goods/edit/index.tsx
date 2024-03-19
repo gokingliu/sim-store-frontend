@@ -40,16 +40,15 @@ const GoodsEdit: FC<PropsGoodsEdit> = forwardRef(
     }, [id, form]);
 
     /** Method */
-    const restForm = () => {
-      loadingFC(false);
-      setDisabled(false);
+    const restForm = (value: boolean) => {
+      loadingFC(value);
+      setDisabled(value);
     };
     const submit = () => {
-      setDisabled(true);
+      restForm(true);
       form.submit();
     };
     const onFinish = (value: GoodsEditFormValue) => {
-      console.log(222222);
       try {
         Api.PostGoodsListItem(value)
           .then((res) => {
@@ -59,14 +58,14 @@ const GoodsEdit: FC<PropsGoodsEdit> = forwardRef(
             // TODO
           })
           .finally(() => {
-            restForm();
+            restForm(false);
           });
       } catch (e) {
-        restForm();
+        restForm(false);
       }
     };
     const onFinishFailed = () => {
-      restForm();
+      restForm(false);
     };
 
     /** ReactDOM */
@@ -137,13 +136,13 @@ const GoodsEdit: FC<PropsGoodsEdit> = forwardRef(
             label: '套餐内容',
             name: 'combo',
             rules: [{ required: true, message: '请输入套餐内容' }],
-            children: <Input maxLength={128} placeholder="请输入套餐内容" />,
+            children: <Input.TextArea rows={3} maxLength={128} placeholder="请输入套餐内容" />,
           },
           {
             label: '优惠详情',
             name: 'details',
             rules: [{ required: true, message: '请输入优惠详情' }],
-            children: <Input maxLength={1000} placeholder="请输入优惠详情" />,
+            children: <Input.TextArea rows={4} maxLength={1000} placeholder="请输入优惠详情" />,
           },
           {
             label: '商品链接',

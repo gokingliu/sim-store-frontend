@@ -7,6 +7,7 @@ import { RequestGoodsList, ResponseGoodsList } from '@/types';
 
 /** Mock Data */
 import { MockGoodsListData } from './mock.config';
+import { Helmet } from 'react-helmet';
 
 const Goods: FC = () => {
   /** DisplayName */
@@ -56,6 +57,10 @@ const Goods: FC = () => {
   /** ReactDOM */
   return (
     <>
+      <Helmet>
+        <title>商品管理 - SIM Store</title>
+      </Helmet>
+
       <GoodsSearch add={handleListItem} search={search} />
 
       <GoodsList goodsList={goodsList} handleListItem={handleListItem} />

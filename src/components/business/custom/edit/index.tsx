@@ -1,10 +1,11 @@
-import React, { forwardRef, useImperativeHandle, useState, FC, Ref } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useState, FC, Ref } from 'react';
 import { Form, Input, Modal } from 'antd';
-import { PropsCustomEdit } from '@/types';
+import { PropsCustomEdit, RequestCustomInfo } from '@/types';
 import ConfigForm from '@/components/common/config-form';
 import './index.less';
+import Api from '@/apis';
 
-const CustomEdit: FC<PropsCustomEdit> = forwardRef(({}, ref: Ref<{ openModal: () => void }>) => {
+const CustomEdit: FC<PropsCustomEdit> = forwardRef(({ info }: PropsCustomEdit, ref: Ref<{ openModal: () => void }>) => {
   /** DisplayName */
   CustomEdit.displayName = 'CustomEdit';
 
@@ -16,20 +17,38 @@ const CustomEdit: FC<PropsCustomEdit> = forwardRef(({}, ref: Ref<{ openModal: ()
   /** Data */
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm(); // 表单 Ref
-  const { TextArea } = Input;
+  const [buttonOkLoading, setButtonOkLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+
+  /** Life Cycle Hook */
+  useEffect(() => {
+    form.setFieldsValue(info.current);
+  }, [info.current, form]);
 
   /** Method */
+  const restForm = (value: boolean) => {
+    setButtonOkLoading(value);
+    setDisabled(value);
+  };
   const openModal = () => {
     setIsModalOpen(true);
   };
   const handleOk = () => {
+    restForm(true);
     form.submit();
   };
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const onFinish = (values: null) => {
-    console.log('Finish:', values);
+  const onFinish = (values: RequestCustomInfo) => {
+    Api.PostCustomInfo(values)
+      .then(() => {})
+      .catch(() => {
+        // TODO 联调后 value 改为 null
+      })
+      .finally(() => {
+        restForm(false);
+      });
   };
 
   /** ReactDOM */
@@ -41,13 +60,14 @@ const CustomEdit: FC<PropsCustomEdit> = forwardRef(({}, ref: Ref<{ openModal: ()
       maskClosable={false}
       open={isModalOpen}
       onOk={handleOk}
-      okButtonProps={{ size: 'middle' }}
+      okButtonProps={{ size: 'middle', disabled: buttonOkLoading }}
       onCancel={handleCancel}
       cancelButtonProps={{ size: 'middle' }}
     >
       <ConfigForm
         formConfig={{
           form,
+          disabled,
           className: 'edit-form',
           name: 'edit-form',
           labelAlign: 'left',
@@ -73,7 +93,7 @@ const CustomEdit: FC<PropsCustomEdit> = forwardRef(({}, ref: Ref<{ openModal: ()
             className: 'search-form__item',
             label: '头图',
             name: 'banner',
-            children: <TextArea maxLength={256} rows={4} placeholder="请输入头图链接" />,
+            children: <Input.TextArea maxLength={256} rows={4} placeholder="请输入头图链接" />,
           },
         ]}
       />

@@ -71,14 +71,11 @@ const DataSlice = createSlice({
 });
 
 const actionData = (data: { key: keyof StoreDataState; value: string | number }) => (): string => {
-  // dispatch(actionDataState(DataState));
   const currentValue = DataSlice.getInitialState()[data.key].find((item) => item.value === data.value);
 
   return currentValue?.label as string;
 };
 
 export { actionData };
-
-export const { actionDataState } = DataSlice.actions;
 
 export default DataSlice.reducer;
