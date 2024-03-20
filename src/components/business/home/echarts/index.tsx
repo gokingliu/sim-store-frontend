@@ -5,6 +5,7 @@ import * as echarts from 'echarts/core';
 import { LineChart } from 'echarts/charts';
 import { GridComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
+import { useTranslation } from 'react-i18next';
 import CardBox from '@/components/common/cardbox';
 import { PropsHomeEcharts } from '@/types';
 import { ECOptionConfig } from './index.config';
@@ -18,6 +19,7 @@ const HomeEcharts: FC<PropsHomeEcharts> = ({ visit }) => {
 
   /** Data */
   const echartsDOM = useRef(null);
+  const { t } = useTranslation();
 
   /** Life Cycle Hook */
   useEffect(() => {
@@ -50,7 +52,7 @@ const HomeEcharts: FC<PropsHomeEcharts> = ({ visit }) => {
   return (
     <Row className="echarts">
       <Col span={24}>
-        <CardBox title="访问量分析">
+        <CardBox title={t('访问量分析')}>
           {visit ? <div ref={echartsDOM} className="echarts-dom" /> : <Skeleton active paragraph={{ rows: 5 }} />}
         </CardBox>
       </Col>

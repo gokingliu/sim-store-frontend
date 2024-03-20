@@ -2,8 +2,8 @@ import React, { FunctionComponent, useState } from 'react';
 import { Flex, Typography } from 'antd';
 import LoginLoginForm from '@/components/business/login/login-form';
 import LoginRegisterForm from '@/components/business/login/register-form';
-import Logo from '../../assets/img/logo.png';
-import LoginBoxBG from '../../assets/svg/login-box-bg.svg';
+import Logo from '@/assets/img/logo.png';
+import LoginBoxBG from '@/assets/svg/login-box-bg.svg';
 import './index.less';
 
 const Login: FunctionComponent = () => {

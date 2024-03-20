@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState, ElementRef, FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import Api from '@/apis';
 import GoodsSearch from '@/components/business/goods/search';
 import GoodsList from '@/components/business/goods/list';
@@ -23,11 +24,12 @@ const Goods: FC = () => {
   const modalRef = useRef<ElementRef<typeof GoodsModal>>(null);
   const [goodsItem, setGoodsItem] = useState<{ id: number; button: string; name: string }>({
     id: 0,
-    button: '',
+    button: 'add',
     name: '',
   });
   const [searchParams, setSearchParams] = useState<RequestGoodsList>({ ...defaultSearchParams });
   const [goodsList, setGoodsList] = useState<ResponseGoodsList[] | null>(null);
+  const { t } = useTranslation();
 
   /** Life Cycle Hook */
   useEffect(() => {
@@ -58,7 +60,7 @@ const Goods: FC = () => {
   return (
     <>
       <Helmet>
-        <title>商品管理 - SIM Store</title>
+        <title>{t('商品管理')} - SIM Store</title>
       </Helmet>
 
       <GoodsSearch add={handleListItem} search={search} />

@@ -1,11 +1,15 @@
 import React, { FC } from 'react';
 import { Avatar, Button, List, Skeleton } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { PropsGoodsList, ResponseGoodsList } from '@/types';
 import './index.less';
 
 const GoodsList: FC<PropsGoodsList> = ({ goodsList, handleListItem }) => {
   /** DisplayName */
   GoodsList.displayName = 'GoodsList';
+
+  /** Data */
+  const { t } = useTranslation();
 
   /** Method */
   const openModal = (id: number, button: string, name: string) => {
@@ -30,8 +34,12 @@ const GoodsList: FC<PropsGoodsList> = ({ goodsList, handleListItem }) => {
               }
               description={item.description}
             />
-            {[{ name: '详情' }, { name: '下架' }, { name: '编辑' }].map((button, index) => (
-              <Button key={index} type="link" size="small" onClick={() => openModal(item.id, button.name, item.name)}>
+            {[
+              { name: t('详情'), type: '详情' },
+              { name: t('下架'), type: '下架' },
+              { name: t('编辑'), type: '编辑' },
+            ].map((button, index) => (
+              <Button key={index} type="link" size="small" onClick={() => openModal(item.id, button.type, item.name)}>
                 {button.name}
               </Button>
             ))}

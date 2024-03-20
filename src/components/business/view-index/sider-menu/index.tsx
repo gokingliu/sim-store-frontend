@@ -1,6 +1,7 @@
 import React, { useState, FC } from 'react';
 import { Menu, type MenuProps } from 'antd';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { PropsSiderMenu } from '@/types';
 import { FormatPainterOutlined, PieChartOutlined, ProfileOutlined } from '@ant-design/icons';
 
@@ -9,23 +10,24 @@ const SiderMenu: FC<PropsSiderMenu> = () => {
   SiderMenu.displayName = 'SiderMenu';
 
   /** Data */
+  const { t } = useTranslation();
   const menuList = [
     {
       key: 'home',
-      label: <NavLink to="home">数据中心</NavLink>,
+      label: <NavLink to="home">{t('数据中心')}</NavLink>,
       icon: <PieChartOutlined />,
     },
     {
       key: 'manage',
-      label: '商品管理',
+      label: t('商品管理'),
       icon: <ProfileOutlined />,
-      children: [{ key: 'goods', label: <NavLink to="goods">商品管理列表</NavLink> }],
+      children: [{ key: 'goods', label: <NavLink to="goods">{t('商品管理列表')}</NavLink> }],
     },
     {
       key: 'diy',
-      label: '定制中心',
+      label: t('定制中心'),
       icon: <FormatPainterOutlined />,
-      children: [{ key: 'custom', label: <NavLink to="custom">页面定制</NavLink> }],
+      children: [{ key: 'custom', label: <NavLink to="custom">{t('页面定制')}</NavLink> }],
     },
   ];
   const location = useLocation();

@@ -1,7 +1,8 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useState, FC, Ref } from 'react';
 import { Form, Input, Modal } from 'antd';
-import { PropsCustomEdit, RequestCustomInfo } from '@/types';
+import { useTranslation } from 'react-i18next';
 import ConfigForm from '@/components/common/config-form';
+import { PropsCustomEdit, RequestCustomInfo } from '@/types';
 import './index.less';
 import Api from '@/apis';
 
@@ -19,6 +20,7 @@ const CustomEdit: FC<PropsCustomEdit> = forwardRef(({ info }: PropsCustomEdit, r
   const [form] = Form.useForm(); // 表单 Ref
   const [buttonOkLoading, setButtonOkLoading] = useState(false);
   const [disabled, setDisabled] = useState(false);
+  const { t, i18n } = useTranslation();
 
   /** Life Cycle Hook */
   useEffect(() => {
@@ -55,7 +57,7 @@ const CustomEdit: FC<PropsCustomEdit> = forwardRef(({ info }: PropsCustomEdit, r
   return (
     <Modal
       destroyOnClose
-      title="编辑"
+      title={t('编辑')}
       width="30%"
       maskClosable={false}
       open={isModalOpen}
@@ -71,27 +73,27 @@ const CustomEdit: FC<PropsCustomEdit> = forwardRef(({ info }: PropsCustomEdit, r
           className: 'edit-form',
           name: 'edit-form',
           labelAlign: 'left',
-          labelCol: { span: 3 },
-          wrapperCol: { span: 21 },
+          labelCol: { span: { zh: 3, en: 4 }[i18n.language] },
+          wrapperCol: { span: { zh: 21, en: 20 }[i18n.language] },
           size: 'middle',
           onFinish,
         }}
         formItemConfigs={[
           {
             className: 'search-form__item',
-            label: '微信号',
+            label: t('微信号'),
             name: 'wechat',
             children: <Input maxLength={10} placeholder="请输入微信号" />,
           },
           {
             className: 'search-form__item',
-            label: '滚屏文字',
+            label: t('滚屏文字'),
             name: 'info',
             children: <Input maxLength={128} placeholder="请输入滚屏文字" />,
           },
           {
             className: 'search-form__item',
-            label: '头图',
+            label: t('头图'),
             name: 'banner',
             children: <Input.TextArea maxLength={256} rows={4} placeholder="请输入头图链接" />,
           },

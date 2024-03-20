@@ -16,7 +16,6 @@ const UserSlice = createSlice({
   reducers: {
     // 设置用户信息
     actionUserState(state, action: PayloadAction<StoreUserState>) {
-      localStorage.clear();
       const { userName, role, token, remember } = action.payload;
       [state.userName, state.role, state.token, state.remember] = [userName, role, token, remember];
       if (remember && token) localStorage.setItem('token', token);

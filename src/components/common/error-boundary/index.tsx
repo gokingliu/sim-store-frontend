@@ -11,8 +11,8 @@ class ErrorBoundary extends Component<PropsErrorBoundary, StateErrorBoundary> {
   errorResult = (
     <Result
       status="error"
-      title={<p style={{ color: '#fff' }}>逻辑错误</p>}
-      subTitle={<p style={{ color: '#fff' }}>请刷新页面再次尝试</p>}
+      title={<p style={{ color: '#000' }}>逻辑错误</p>}
+      subTitle={<p style={{ color: '#000' }}>请刷新页面再次尝试</p>}
     />
   );
 

@@ -1,5 +1,6 @@
 import React, { ElementRef, FC, useRef } from 'react';
 import { Button, Col, Flex, Row, Skeleton } from 'antd';
+import { useTranslation } from 'react-i18next';
 import CardBox from '@/components/common/cardbox';
 import HomeMessage from '@/components/business/home/message';
 import { PropsHomeOverView } from '@/types';
@@ -11,6 +12,7 @@ const HomeOverView: FC<PropsHomeOverView> = ({ visit, goods, message }) => {
 
   /** Data */
   const messageRef = useRef<ElementRef<typeof HomeMessage>>(null);
+  const { t } = useTranslation();
 
   /** Method */
   const checkMessage = () => {
@@ -22,18 +24,20 @@ const HomeOverView: FC<PropsHomeOverView> = ({ visit, goods, message }) => {
     <>
       <Row className="home-overview">
         <Col className="home-content" span={7}>
-          <CardBox title="访问总量">
+          <CardBox title={t('访问总量')}>
             <Skeleton loading={!visit} active paragraph={{ rows: 2 }}>
               <Flex className="card-box" vertical={true} align="center">
                 <div className="main-number">{visit?.total}</div>
-                <div>昨日访问量：{visit?.page_view.at(-2)}</div>
+                <div>
+                  {t('昨日访问量')}：{visit?.page_view.at(-2)}
+                </div>
               </Flex>
             </Skeleton>
           </CardBox>
         </Col>
 
         <Col className="home-content" span={10}>
-          <CardBox title="最新消息">
+          <CardBox title={t('最新消息')}>
             <Skeleton loading={!visit} active paragraph={{ rows: 2 }}>
               <Flex className="card-box" vertical={true} align="center">
                 {message?.map((item) => (
@@ -47,11 +51,13 @@ const HomeOverView: FC<PropsHomeOverView> = ({ visit, goods, message }) => {
         </Col>
 
         <Col className="home-content" span={7}>
-          <CardBox title="商品总量">
+          <CardBox title={t('商品总量')}>
             <Skeleton loading={!visit} active paragraph={{ rows: 2 }}>
               <Flex className="card-box" vertical={true} align="center">
                 <div className="main-number">{goods?.total}</div>
-                <div>下架商品数：{goods?.off}</div>
+                <div>
+                  {t('下架商品数')}：{goods?.off}
+                </div>
               </Flex>
             </Skeleton>
           </CardBox>

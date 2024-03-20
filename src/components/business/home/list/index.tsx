@@ -1,18 +1,22 @@
 import React, { FC } from 'react';
 import { Col, List, Row, Skeleton } from 'antd';
-import { PropsHomeList, ResponseRanking } from '@/types';
+import { useTranslation } from 'react-i18next';
 import CardBox from '@/components/common/cardbox';
+import { PropsHomeList, ResponseRanking } from '@/types';
 import './index.less';
 
 const HomeList: FC<PropsHomeList> = ({ ranking }) => {
   /** DisplayName */
   HomeList.displayName = 'HomeList';
 
+  /** Data */
+  const { t } = useTranslation();
+
   /** ReactDOM */
   return (
     <Row className="home-list">
       <Col className="home-content" span={24}>
-        <CardBox title="产品排行分析">
+        <CardBox title={t('产品排行分析')}>
           <div className="list-box">
             <Skeleton className="skeleton" loading={!ranking?.length} active paragraph={{ rows: 15 }}>
               <List

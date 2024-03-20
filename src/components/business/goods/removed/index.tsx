@@ -1,4 +1,5 @@
 import React, { forwardRef, useImperativeHandle, FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { PropsGoodsRemoved } from '@/types';
 import Api from '@/apis';
 
@@ -11,6 +12,9 @@ const GoodsRemoved: FC<PropsGoodsRemoved> = forwardRef(
     useImperativeHandle(ref, () => ({
       post,
     }));
+
+    /** Data */
+    const { t } = useTranslation();
 
     /** Method */
     const post = () => {
@@ -29,7 +33,7 @@ const GoodsRemoved: FC<PropsGoodsRemoved> = forwardRef(
     /** ReactDOM */
     return (
       <p>
-        确认下架 <span style={{ color: 'red' }}>{name}</span> ？
+        {t('确认下架')} <span style={{ color: 'red' }}>{name}</span> ？
       </p>
     );
   },

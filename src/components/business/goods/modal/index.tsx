@@ -1,5 +1,6 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useState, useRef, ElementRef, FC, Ref } from 'react';
 import { Modal } from 'antd';
+import { useTranslation } from 'react-i18next';
 import GoodsInfo from '@/components/business/goods/info';
 import GoodsEdit from '@/components/business/goods/edit';
 import GoodsRemoved from '@/components/business/goods/removed';
@@ -21,6 +22,7 @@ const GoodsModal: FC<PropsGoodsModal> = forwardRef(
     const [buttonOkLoading, setButtonOkLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [config, setConfig] = useState<GoodsModalConfig | null>(null);
+    const { t } = useTranslation();
 
     /** Life Cycle Hook */
     useEffect(() => {
@@ -79,7 +81,7 @@ const GoodsModal: FC<PropsGoodsModal> = forwardRef(
     return (
       <Modal
         destroyOnClose
-        title={`${button} ${name && '-'} ${name}`}
+        title={`${t(button)} ${name && '-'} ${name}`}
         width={config?.width}
         maskClosable={false}
         open={isModalOpen}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, FC } from 'react';
 import { Flex } from 'antd';
 import { Helmet } from 'react-helmet';
+import { useTranslation } from 'react-i18next';
 import Api from '@/apis';
 import HomeEcharts from '@/components/business/home/echarts';
 import HomeList from '@/components/business/home/list';
@@ -19,6 +20,7 @@ const Home: FC = () => {
   const [overviewData, setOverviewData] = useState<ResponseOverview | null>(null);
   const [messageData, setMessageData] = useState<ResponseMessage[] | null>(null);
   const [rankingData, setRankingData] = useState<ResponseRanking[] | null>(null);
+  const { t } = useTranslation();
 
   /** Life Cycle Hook */
   useEffect(() => {
@@ -63,7 +65,7 @@ const Home: FC = () => {
   return (
     <>
       <Helmet>
-        <title>数据中心 - SIM Store</title>
+        <title>{t('数据中心')} - SIM Store</title>
       </Helmet>
 
       <Flex className="home" vertical={true}>

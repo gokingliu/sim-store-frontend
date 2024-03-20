@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, ElementRef, FC } from 'react';
 import { Button, Descriptions, Flex, type DescriptionsProps } from 'antd';
 import { Helmet } from 'react-helmet';
+import { useTranslation } from 'react-i18next';
 import Api from '@/apis';
 import CustomEdit from '@/components/business/custom/edit';
 import { ResponseCustomInfo } from '@/types';
@@ -17,6 +18,7 @@ const Custom: FC = () => {
   const editRef = useRef<ElementRef<typeof CustomEdit>>(null);
   const customInfoData = useRef<ResponseCustomInfo>();
   const [customInfo, setCustomInfo] = useState<DescriptionsProps['items']>();
+  const { t } = useTranslation();
 
   /** Life Cycle Hook */
   useEffect(() => {
@@ -24,10 +26,10 @@ const Custom: FC = () => {
       .then((res) => {
         customInfoData.current = res.data.result;
         setCustomInfo([
-          { label: '微信号', children: res.data.result.wechat },
-          { label: '滚屏文字', children: res.data.result.info },
+          { label: t('微信号'), children: res.data.result.wechat },
+          { label: t('滚屏文字'), children: res.data.result.info },
           {
-            label: '头图',
+            label: t('头图'),
             children: (
               <>
                 {res.data.result.banner.split('\n').map((element, index) => (
@@ -42,10 +44,10 @@ const Custom: FC = () => {
         // TODO 联调后 value 改为 null
         customInfoData.current = MockCustomInfoData;
         setCustomInfo([
-          { label: '微信号', children: MockCustomInfoData.wechat },
-          { label: '滚屏文字', children: MockCustomInfoData.info },
+          { label: t('微信号'), children: MockCustomInfoData.wechat },
+          { label: t('滚屏文字'), children: MockCustomInfoData.info },
           {
-            label: '头图',
+            label: t('头图'),
             children: (
               <>
                 {MockCustomInfoData.banner.split('\n').map((element, index) => (
@@ -56,7 +58,7 @@ const Custom: FC = () => {
           },
         ]);
       });
-  }, []);
+  }, [t]);
 
   /** Method */
   const openModal = () => {
@@ -67,13 +69,13 @@ const Custom: FC = () => {
   return (
     <Flex className="custom" justify="flex-start" vertical>
       <Helmet>
-        <title>页面定制 - SIM Store</title>
+        <title>{t('页面定制')} - SIM Store</title>
       </Helmet>
 
       <Descriptions bordered column={1} layout="vertical" size="small" items={customInfo} />
 
       <Button className="button" type="primary" size="middle" onClick={openModal}>
-        修改
+        {t('修改')}
       </Button>
 
       <CustomEdit ref={editRef} info={customInfoData} />

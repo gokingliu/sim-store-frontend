@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Avatar, Button, Popover } from 'antd';
 import { useStoreDispatch, useStoreSelector, StoreState } from '@/store';
 import { actionLogout } from '@/store/modules/user.store';
+import { useTranslation } from 'react-i18next';
 import { PropsUserName } from '@/types';
 import './index.less';
 
@@ -11,7 +12,7 @@ const UserName: FC<PropsUserName> = () => {
 
   /** Data */
   const colorList = [
-    '#f56a00',
+    '#0960bd',
     '#7265e6',
     '#ffbf00',
     '#00a2ae',
@@ -24,10 +25,11 @@ const UserName: FC<PropsUserName> = () => {
   ]; // 颜色值数组
   const { userName, token } = useStoreSelector((state: StoreState) => state.user); // 从 store 中获取 userName token
   const dispatch = useStoreDispatch(); // 调用 store 方法
+  const { t } = useTranslation();
 
   /** Method */
   // 获取显示用户名
-  const handleUserName = () => (token ? userName.substring(0, 1) : '登陆');
+  const handleUserName = () => (token ? userName.substring(0, 1) : 'undefined');
   // 获取头像背景颜色
   const avatarColor = (userName: string): string => {
     try {
@@ -43,14 +45,13 @@ const UserName: FC<PropsUserName> = () => {
     <Popover
       overlayClassName="top-bar__tooltip"
       placement="bottom"
-      getPopupContainer={() => document.getElementById('TopBar') as HTMLElement}
       content={
         <Button className="button" type="link" size="small" onClick={() => dispatch(actionLogout())}>
-          退 出
+          {t('退出')}
         </Button>
       }
     >
-      <Avatar className="top-bar__avatar" style={{ backgroundColor: avatarColor(userName) }} gap={6} size={32}>
+      <Avatar className="top-bar__avatar" style={{ backgroundColor: avatarColor(userName) }} gap={4} size={28}>
         {handleUserName()}
       </Avatar>
     </Popover>

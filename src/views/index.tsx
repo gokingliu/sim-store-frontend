@@ -1,7 +1,9 @@
 import React, { FC, useState } from 'react';
-import { Button, Layout } from 'antd';
+import { Button, Flex, Layout } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import SiderMenu from '@/components/business/view-index/sider-menu';
+import Dark from '@/components/business/view-index/dark';
+import Language from '@/components/business/view-index/language';
 import UserName from '@/components/business/view-index/username';
 import ViewContent from '@/components/business/view-index/content';
 import Logo from '../assets/img/logo.png';
@@ -36,7 +38,13 @@ const Index: FC = () => {
             onClick={() => setCollapsed(!collapsed)}
           />
 
-          <UserName />
+          <Flex gap="small" align="center">
+            <Dark />
+
+            <Language />
+
+            <UserName />
+          </Flex>
         </Layout.Header>
         <Layout.Content className="index-content">
           <ViewContent />
