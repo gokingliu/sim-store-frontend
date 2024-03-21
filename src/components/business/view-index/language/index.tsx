@@ -1,4 +1,4 @@
-import React, { useEffect, FC } from 'react';
+import React, { FC } from 'react';
 import { Button, Flex, Popover } from 'antd';
 import { TranslationOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
@@ -12,18 +12,6 @@ const Language: FC<PropsLanguage> = () => {
   /** Data */
   const { i18n } = useTranslation();
 
-  /** Life Cycle Hook */
-  useEffect(() => {
-    const language = localStorage.getItem('language');
-    language && onChangeLanguage(language);
-  }, []);
-
-  /** Method */
-  const onChangeLanguage = (language: string) => {
-    i18n.changeLanguage(language);
-    localStorage.setItem('language', language);
-  };
-
   /** ReactDOM */
   return (
     <Popover
@@ -31,10 +19,10 @@ const Language: FC<PropsLanguage> = () => {
       placement="bottom"
       content={
         <Flex vertical>
-          <Button className="button" type="link" size="small" onClick={() => onChangeLanguage('zh')}>
+          <Button className="button" type="link" size="small" onClick={() => i18n.changeLanguage('zh')}>
             简体中文
           </Button>{' '}
-          <Button className="button" type="link" size="small" onClick={() => onChangeLanguage('en')}>
+          <Button className="button" type="link" size="small" onClick={() => i18n.changeLanguage('en')}>
             English
           </Button>
         </Flex>

@@ -3,6 +3,8 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { resources } from './modules/resources';
 
+const defaultLng = localStorage.getItem('i18nextLng') || 'zh';
+
 i18n
   // 检测用户当前使用的语言
   .use(LanguageDetector)
@@ -13,8 +15,8 @@ i18n
   .init({
     debug: false,
     resources,
-    fallbackLng: 'zh',
-    lng: 'zh',
+    fallbackLng: defaultLng,
+    lng: defaultLng,
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },
