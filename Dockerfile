@@ -6,3 +6,5 @@ COPY nginx/ /etc/nginx/
 
 # 复制静态资源到指定目录
 ADD dist/ /data/websites/
+
+EXPOSE 8881/tcp
