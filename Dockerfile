@@ -6,6 +6,3 @@ COPY nginx/ /etc/nginx/
 
 # 复制静态资源到指定目录
 ADD dist/ /data/websites/
-
-# 执行脚本
-ENTRYPOINT ["/app/entrypoint.sh"]
