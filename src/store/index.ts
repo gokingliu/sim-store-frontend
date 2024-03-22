@@ -1,9 +1,10 @@
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import dark from './modules/dark.store';
 import data from './modules/data.store';
 import user from './modules/user.store';
 
-const reducer = combineReducers({ data, user });
+const reducer = combineReducers({ dark, data, user });
 
 const store = configureStore({ reducer });
 

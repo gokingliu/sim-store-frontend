@@ -1,6 +1,8 @@
-import React, { useEffect, useState, FC } from 'react';
+import React, { useEffect, FC } from 'react';
 import { Button } from 'antd';
 import { BulbOutlined, SunOutlined } from '@ant-design/icons';
+import { useStoreDispatch, useStoreSelector, StoreState } from '@/store';
+import { actionDarkState, setDarkModeClass } from '@/store/modules/dark.store';
 import { PropsDark } from '@/types';
 
 const Dark: FC<PropsDark> = () => {
@@ -8,22 +10,23 @@ const Dark: FC<PropsDark> = () => {
   Dark.displayName = 'Dark';
 
   /** Data */
-  const [dark, setDark] = useState(false);
+  const dispatch = useStoreDispatch(); // 调用 store 方法
+  const { darkMode } = useStoreSelector((state: StoreState) => state.dark);
 
   /** Life Cycle Hook */
   useEffect(() => {
-    const storageDark = localStorage.getItem('dark');
-    setDark({ true: true, false: false }[storageDark || 'false'] as boolean);
+    dispatch(setDarkModeClass(darkMode));
   }, []);
 
   /** Method */
   const onChangeDark = () => {
-    setDark(!dark);
-    localStorage.setItem('dark', String(!dark));
+    localStorage.setItem('dark', String(!darkMode));
+    dispatch(setDarkModeClass(!darkMode));
+    dispatch(actionDarkState(!darkMode));
   };
 
   /** ReactDOM */
-  return <Button type="text" icon={dark ? <BulbOutlined /> : <SunOutlined />} onClick={onChangeDark} />;
+  return <Button type="text" icon={darkMode ? <BulbOutlined /> : <SunOutlined />} onClick={onChangeDark} />;
 };
 
 export default Dark;

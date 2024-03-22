@@ -5,6 +5,7 @@ import * as echarts from 'echarts/core';
 import { LineChart } from 'echarts/charts';
 import { GridComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
+import { useStoreSelector, StoreState } from '@/store';
 import { useTranslation } from 'react-i18next';
 import CardBox from '@/components/common/cardbox';
 import { PropsHomeEcharts } from '@/types';
@@ -20,6 +21,7 @@ const HomeEcharts: FC<PropsHomeEcharts> = ({ visit }) => {
   /** Data */
   const echartsDOM = useRef(null);
   const { t } = useTranslation();
+  const { darkMode } = useStoreSelector((state: StoreState) => state.dark);
 
   /** Life Cycle Hook */
   useEffect(() => {
@@ -30,6 +32,12 @@ const HomeEcharts: FC<PropsHomeEcharts> = ({ visit }) => {
       const config = cloneDeep(ECOptionConfig);
       config.xAxis.data = visit?.days || [];
       config.series[0].data = visit?.page_view || [];
+      if (darkMode) {
+        config.xAxis.axisLine.lineStyle.color = 'hsla(225deg, 15%, 17%, 1)';
+        config.xAxis.axisLabel.color = 'rgba(255, 255, 255, 0.6)';
+        config.yAxis.splitLine.lineStyle.color = 'hsla(225deg, 15%, 17%, 1)';
+        config.yAxis.axisLabel.color = 'rgba(255, 255, 255, 0.6)';
+      }
       myCharts.setOption(config);
 
       echartsResize = debounce(() => myCharts?.resize(), 100, {
@@ -46,7 +54,7 @@ const HomeEcharts: FC<PropsHomeEcharts> = ({ visit }) => {
         echartsResize.cancel();
       }
     };
-  }, [visit]);
+  }, [visit, darkMode]);
 
   /** ReactDOM */
   return (

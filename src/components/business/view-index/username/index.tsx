@@ -4,7 +4,6 @@ import { useStoreDispatch, useStoreSelector, StoreState } from '@/store';
 import { actionLogout } from '@/store/modules/user.store';
 import { useTranslation } from 'react-i18next';
 import { PropsUserName } from '@/types';
-import './index.less';
 
 const UserName: FC<PropsUserName> = () => {
   /** DisplayName */
@@ -12,7 +11,7 @@ const UserName: FC<PropsUserName> = () => {
 
   /** Data */
   const colorList = [
-    '#0960bd',
+    '#0052d9',
     '#7265e6',
     '#ffbf00',
     '#00a2ae',
@@ -43,15 +42,20 @@ const UserName: FC<PropsUserName> = () => {
   /** ReactDOM */
   return (
     <Popover
-      overlayClassName="top-bar__tooltip"
+      overlayClassName="username__popover"
       placement="bottom"
       content={
-        <Button className="button" type="link" size="small" onClick={() => dispatch(actionLogout())}>
+        <Button className="button" type="link" size="middle" onClick={() => dispatch(actionLogout())}>
           {t('退出')}
         </Button>
       }
     >
-      <Avatar className="top-bar__avatar" style={{ backgroundColor: avatarColor(userName) }} gap={4} size={28}>
+      <Avatar
+        className="username__avatar"
+        style={{ backgroundColor: avatarColor(userName), marginLeft: 8 }}
+        gap={4}
+        size={28}
+      >
         {handleUserName()}
       </Avatar>
     </Popover>

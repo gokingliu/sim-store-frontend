@@ -6,6 +6,7 @@ import Api from '@/apis';
 import CustomEdit from '@/components/business/custom/edit';
 import { ResponseCustomInfo } from '@/types';
 import './index.less';
+import './dark.less';
 
 /** Mock Data */
 import { MockCustomInfoData } from './mock.config';

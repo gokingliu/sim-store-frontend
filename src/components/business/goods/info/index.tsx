@@ -24,9 +24,9 @@ const GoodsInfo: FC<PropsGoodsInfo> = ({ id }) => {
     const handleData = (goodsListItem: ResponseGoodsListItem): DescriptionsProps['items'] => {
       const data = {
         ...goodsListItem,
-        operator: dispatch(actionData({ key: 'operator', value: goodsListItem.operator })),
-        location: dispatch(actionData({ key: 'location', value: goodsListItem.location })),
-        discount: dispatch(actionData({ key: 'discount', value: goodsListItem.discount })),
+        operator: t(dispatch(actionData({ key: 'operator', value: goodsListItem.operator }))),
+        location: t(dispatch(actionData({ key: 'location', value: goodsListItem.location }))),
+        discount: t(dispatch(actionData({ key: 'discount', value: goodsListItem.discount }))),
       };
 
       return [

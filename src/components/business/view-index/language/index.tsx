@@ -3,7 +3,6 @@ import { Button, Flex, Popover } from 'antd';
 import { TranslationOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { PropsLanguage } from '@/types';
-import './index.less';
 
 const Language: FC<PropsLanguage> = () => {
   /** DisplayName */
@@ -15,14 +14,14 @@ const Language: FC<PropsLanguage> = () => {
   /** ReactDOM */
   return (
     <Popover
-      overlayClassName="top-bar__tooltip"
+      overlayClassName="language__popover"
       placement="bottom"
       content={
         <Flex vertical>
-          <Button className="button" type="link" size="small" onClick={() => i18n.changeLanguage('zh')}>
+          <Button className="button" type="link" size="middle" onClick={() => i18n.changeLanguage('zh')}>
             简体中文
-          </Button>{' '}
-          <Button className="button" type="link" size="small" onClick={() => i18n.changeLanguage('en')}>
+          </Button>
+          <Button className="button" type="link" size="middle" onClick={() => i18n.changeLanguage('en')}>
             English
           </Button>
         </Flex>

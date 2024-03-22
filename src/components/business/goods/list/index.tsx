@@ -3,6 +3,7 @@ import { Avatar, Button, List, Skeleton } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { PropsGoodsList, ResponseGoodsList } from '@/types';
 import './index.less';
+import './dark.less';
 
 const GoodsList: FC<PropsGoodsList> = ({ goodsList, handleListItem }) => {
   /** DisplayName */

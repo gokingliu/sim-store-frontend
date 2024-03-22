@@ -41,25 +41,45 @@ const GoodsSearch: FC<PropsGoodsSearch> = ({ add, search }) => {
             className: 'search-form__item',
             label: t('运营商'),
             name: 'operator',
-            children: <Select options={storeData.operator} placeholder={t('请选择运营商')} />,
+            children: (
+              <Select
+                options={storeData.operator.map((item) => ({ ...item, label: t(item.label) }))}
+                placeholder={t('请选择运营商')}
+              />
+            ),
           },
           {
             className: 'search-form__item',
             label: t('归属地'),
             name: 'location',
-            children: <Select options={storeData.location} placeholder={t('请选择归属地')} />,
+            children: (
+              <Select
+                options={storeData.location.map((item) => ({ ...item, label: t(item.label) }))}
+                placeholder={t('请选择归属地')}
+              />
+            ),
           },
           {
             className: 'search-form__item',
             label: t('优惠期'),
             name: 'discount',
-            children: <Select options={storeData.discount} placeholder={t('请选择优惠期')} />,
+            children: (
+              <Select
+                options={storeData.discount.map((item) => ({ ...item, label: t(item.label) }))}
+                placeholder={t('请选择优惠期')}
+              />
+            ),
           },
           {
             className: 'search-form__item',
             label: t('月租'),
             name: 'fee',
-            children: <Select options={storeData.fee} placeholder={t('请选择月租')} />,
+            children: (
+              <Select
+                options={storeData.fee.map((item) => ({ ...item, label: t(item.label) }))}
+                placeholder={t('请选择月租')}
+              />
+            ),
           },
           {
             className: 'search-form__submit',

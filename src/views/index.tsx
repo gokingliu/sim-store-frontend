@@ -32,7 +32,6 @@ const Index: FC = () => {
       <Layout>
         <Layout.Header className="index-header">
           <Button
-            className="header-button"
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => setCollapsed(!collapsed)}
@@ -46,6 +45,7 @@ const Index: FC = () => {
             <UserName />
           </Flex>
         </Layout.Header>
+
         <Layout.Content className="index-content">
           <ViewContent />
         </Layout.Content>

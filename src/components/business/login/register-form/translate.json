@@ -1,0 +1,19 @@
+{
+  "请输入中文、英文、数字": "Please enter Chinese, English and Numbers",
+  "最短需要 6 位": "Minimum 6 characters required",
+  "请输入英文、数字、常用符号": "Please enter Chinese, English, Numbers and Common Symbols",
+  "输入错误，密码不一致": "Incorrect input, password inconsistent",
+  "需要同意隐私政策": "Need to agree to privacy policy",
+  "登录": "Login",
+  "请输入用户名": "Please enter username",
+  "用户名": "Username",
+  "请输入密码": "Please enter password",
+  "请再次输入密码": "Please enter password again",
+  "密码": "Password",
+  "确认密码": "Confirm Password",
+  "我同意 ": "I agree ",
+  "隐私政策": "Privacy Policy",
+  "注册": "Register",
+  "返回": "Back",
+  "已有账号？返回首页登录吧～": "Already have an account? Return to the homepage and log in~"
+}

@@ -17,12 +17,23 @@ export const ECOptionConfig = {
       fontSize: 14,
       color: 'rgba(0, 0, 0, 0.4)',
     },
+    axisLine: {
+      lineStyle: {
+        color: '#e2e4e9',
+      },
+    },
   },
   yAxis: {
     type: 'value',
     axisLabel: {
       fontSize: 14,
       color: 'rgba(0, 0, 0, 0.4)',
+    },
+    splitLine: {
+      lineStyle: {
+        type: 'dashed',
+        color: '#e2e4e9',
+      },
     },
   },
   series: [

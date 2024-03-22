@@ -96,7 +96,12 @@ const GoodsEdit: FC<PropsGoodsEdit> = forwardRef(
             label: t('运营商'),
             name: 'operator',
             rules: [{ required: true, message: t('请选择运营商') }],
-            children: <Select options={storeData.operator} placeholder={t('请选择运营商')} />,
+            children: (
+              <Select
+                options={storeData.operator.map((item) => ({ ...item, label: t(item.label) }))}
+                placeholder={t('请选择运营商')}
+              />
+            ),
           },
           {
             label: t('月租'),
@@ -126,13 +131,23 @@ const GoodsEdit: FC<PropsGoodsEdit> = forwardRef(
             label: t('归属地'),
             name: 'location',
             rules: [{ required: true, message: t('请选择归属地') }],
-            children: <Select options={storeData.location} placeholder={t('请选择归属地')} />,
+            children: (
+              <Select
+                options={storeData.location.map((item) => ({ ...item, label: t(item.label) }))}
+                placeholder={t('请选择归属地')}
+              />
+            ),
           },
           {
             label: t('优惠期'),
             name: 'discount',
             rules: [{ required: true, message: t('请选择优惠期') }],
-            children: <Select options={storeData.discount} placeholder={t('请选择优惠期')} />,
+            children: (
+              <Select
+                options={storeData.discount.map((item) => ({ ...item, label: t(item.label) }))}
+                placeholder={t('请选择优惠期')}
+              />
+            ),
           },
           {
             label: t('套餐内容'),

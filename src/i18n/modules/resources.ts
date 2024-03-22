@@ -1,5 +1,10 @@
+import Store from '@/store/modules/translate.json';
 import SiderMenu from '@/components/business/view-index/sider-menu/translate.json';
 import UserName from '@/components/business/view-index/username/translate.json';
+
+import Login from '@/views/login/tanslate.json';
+import LoginForm from '@/components/business/login/login-form/translate.json';
+import RegisterForm from '@/components/business/login/register-form/translate.json';
 
 import Home from '@/views/home/translate.json';
 import HomeEcharts from '@/components/business/home/echarts/translate.json';
@@ -21,8 +26,12 @@ import CustomEdit from '@/components/business/custom/edit/translate.json';
 export const resources = {
   en: {
     translation: {
+      ...Store,
       ...SiderMenu,
       ...UserName,
+      ...Login,
+      ...LoginForm,
+      ...RegisterForm,
       ...Home,
       ...HomeEcharts,
       ...HomeList,

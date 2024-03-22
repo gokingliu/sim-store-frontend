@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { StoreDataState, StoreDataItemState } from '@/types';
 
 const DataSlice = createSlice({
@@ -59,15 +59,7 @@ const DataSlice = createSlice({
     ] as StoreDataItemState[],
   },
   // actions，在组件中可以直接通过 dispatch 进行触发
-  reducers: {
-    // 设置用户信息
-    actionDataState(state, action: PayloadAction<StoreDataState>) {
-      if (!state.operator && !state.location && !state.discount) {
-        const { operator, location, discount, fee } = action.payload;
-        [state.operator, state.location, state.discount, state.fee] = [operator, location, discount, fee];
-      }
-    },
-  },
+  reducers: {},
 });
 
 const actionData = (data: { key: keyof StoreDataState; value: string | number }) => (): string => {
