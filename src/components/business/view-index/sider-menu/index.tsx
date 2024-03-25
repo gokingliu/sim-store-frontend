@@ -1,6 +1,6 @@
 import React, { useState, FC } from 'react';
 import { Menu, type MenuProps } from 'antd';
-import { NavLink, useLocation } from 'react-router-dom';
+import { useLocation, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { PropsSiderMenu } from '@/types';
 import { FormatPainterOutlined, PieChartOutlined, ProfileOutlined } from '@ant-design/icons';

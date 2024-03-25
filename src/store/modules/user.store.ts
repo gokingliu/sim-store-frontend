@@ -9,7 +9,7 @@ const UserSlice = createSlice({
   initialState: {
     userName: '',
     role: 0,
-    token: '',
+    token: '123',
     remember: false,
   },
   // actions，在组件中可以直接通过 dispatch 进行触发
