@@ -41,7 +41,7 @@ const HomeEcharts: FC<PropsHomeEcharts> = ({ visit }) => {
       myCharts.setOption(config);
 
       echartsResize = debounce(() => myCharts?.resize(), 100, {
-        leading: true,
+        leading: false,
         trailing: true,
       });
       window.addEventListener('resize', echartsResize);

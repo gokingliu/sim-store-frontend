@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { Flex, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useResponsive } from '@/components/common/responsive';
 import LoginLoginForm from '@/components/business/login/login-form';
 import LoginRegisterForm from '@/components/business/login/register-form';
 import Dark from '@/components/business/view-index/dark';
@@ -17,6 +18,7 @@ const Login: FunctionComponent = () => {
   /** Data */
   const [loginRegister, setLoginRegister] = useState(false);
   const { t } = useTranslation();
+  const desktop = useResponsive();
 
   /** Method */
   const getLoginRegister = (val: boolean) => {
@@ -40,14 +42,14 @@ const Login: FunctionComponent = () => {
         </Flex>
       </Flex>
 
-      <Flex className="login-poster" vertical={true} justify="center">
+      <Flex className={`login-poster ${desktop ? 'pc' : 'mobile'}`} vertical={true} justify="center">
         <img className="poster-image" alt="poster-image" src={LoginBoxBG} />
-        <Typography.Title className="poster-info" level={2}>
+        <Typography.Title className="poster-info" level={3}>
           {t('号卡销售管理平台')}
         </Typography.Title>
       </Flex>
 
-      <Flex className="login-box" vertical={true} justify="center">
+      <Flex className={`login-box ${desktop ? 'pc' : 'mobile'}`} vertical={true} justify="center">
         <div className="login-container">
           {loginRegister ? (
             <LoginRegisterForm getValue={getLoginRegister} />

@@ -1,19 +1,19 @@
-import { useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { Grid } from 'antd';
 
-const Responsive = () => {
+export const useResponsive = () => {
   /** Data */
   const screens = Grid.useBreakpoint();
-  const isDesktop = useRef(true);
-  isDesktop.current = !!Object.entries(screens).length
-    ? Object.entries(screens)
+  const [desktop, setDesktop] = useState(true);
+  useEffect(() => {
+    setDesktop(
+      Object.entries(screens)
         .filter((screen) => screen[1])
         .map((screen) => screen[0])
-        .some((screen) => ['md', 'lg', 'xl', 'xxl'].includes(screen))
-    : isDesktop.current;
+        .some((screen) => ['lg', 'xl', 'xxl'].includes(screen)),
+    );
+  }, [screens]);
 
   /** ReactDOM */
-  return isDesktop;
+  return desktop;
 };
-
-export default Responsive;

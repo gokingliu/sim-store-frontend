@@ -1,1 +1,3 @@
-export interface PropsSiderMenu {}
+export interface PropsSiderMenu {
+  closeDrawer: () => void;
+}

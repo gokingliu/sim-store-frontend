@@ -4,19 +4,35 @@
   padding-bottom: 16px;
 
   .add {
-    width: 80px;
-    float: left;
+    width: 100px;
   }
 
-  .search-form {
-    float: right;
+  .search-dropdown {
+    width: auto;
+  }
+}
 
-    &__item {
+.search-form {
+  padding: 16px 0 0 16px;
+  background-color: hsla(225deg, 15%, 25%, 1);
+
+  .search-form__item {
+    padding-bottom: 16px;
+  }
+
+  &.pc {
+    width: 488px;
+
+    .search-form__item {
       width: 220px;
     }
+  }
 
-    &__submit {
-      margin-inline-end: 0;
+  &.mobile {
+    width: calc(100% - 16px);
+
+    .search-form__item {
+      width: calc(100% - 16px);
     }
   }
 }

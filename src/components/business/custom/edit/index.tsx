@@ -1,6 +1,7 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useState, FC, Ref } from 'react';
 import { Form, Input, Modal } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useResponsive } from '@/components/common/responsive';
 import ConfigForm from '@/components/common/config-form';
 import { PropsCustomEdit, RequestCustomInfo } from '@/types';
 import './index.less';
@@ -21,6 +22,7 @@ const CustomEdit: FC<PropsCustomEdit> = forwardRef(({ info }: PropsCustomEdit, r
   const [buttonOkLoading, setButtonOkLoading] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const { t, i18n } = useTranslation();
+  const desktop = useResponsive();
 
   /** Life Cycle Hook */
   useEffect(() => {
@@ -58,7 +60,7 @@ const CustomEdit: FC<PropsCustomEdit> = forwardRef(({ info }: PropsCustomEdit, r
     <Modal
       destroyOnClose
       title={t('编辑')}
-      width="30%"
+      width={desktop ? '650px' : 'calc(100% - 32px)'}
       maskClosable={false}
       open={isModalOpen}
       onOk={handleOk}

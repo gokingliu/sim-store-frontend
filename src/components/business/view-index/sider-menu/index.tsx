@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { PropsSiderMenu } from '@/types';
 import { FormatPainterOutlined, PieChartOutlined, ProfileOutlined } from '@ant-design/icons';
 
-const SiderMenu: FC<PropsSiderMenu> = () => {
+const SiderMenu: FC<PropsSiderMenu> = ({ closeDrawer }) => {
   /** DisplayName */
   SiderMenu.displayName = 'SiderMenu';
 
@@ -53,6 +53,7 @@ const SiderMenu: FC<PropsSiderMenu> = () => {
       mode="inline"
       defaultSelectedKeys={[path]}
       openKeys={openKeys}
+      onClick={() => closeDrawer()}
       onOpenChange={onOpenChange}
       items={menuList}
     />

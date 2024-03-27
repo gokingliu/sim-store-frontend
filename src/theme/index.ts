@@ -3,12 +3,17 @@ import type { ThemeConfig } from 'antd';
 export const ThemeDefault: ThemeConfig = {
   token: {
     borderRadius: 2,
+    colorBgMask: 'rgba(0, 0, 0, 0.8)',
     colorPrimary: '#0052d9',
     sizePopupArrow: 0,
   },
   components: {
     Button: {
+      contentLineHeight: 1,
       primaryShadow: 'rgba(0, 0, 0, 0.1) 0 4px 12px',
+    },
+    Form: {
+      verticalLabelPadding: 0,
     },
     List: {
       itemPadding: '16px',

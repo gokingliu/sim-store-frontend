@@ -52,7 +52,12 @@ const Custom: FC = () => {
             children: (
               <>
                 {MockCustomInfoData.banner.split('\n').map((element, index) => (
-                  <img key={index} width={400} style={{ marginRight: '16px' }} src={element} alt="banner" />
+                  <img
+                    key={index}
+                    style={{ width: '100%', maxWidth: '430px', marginRight: '16px' }}
+                    src={element}
+                    alt="banner"
+                  />
                 ))}
               </>
             ),
@@ -73,7 +78,7 @@ const Custom: FC = () => {
         <title>{t('页面定制')} - SIM Store</title>
       </Helmet>
 
-      <Descriptions bordered column={1} layout="vertical" size="small" items={customInfo} />
+      <Descriptions className="descriptions" bordered column={1} layout="vertical" size="small" items={customInfo} />
 
       <Button className="button" type="primary" size="middle" onClick={openModal}>
         {t('修改')}

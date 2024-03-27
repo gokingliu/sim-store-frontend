@@ -1,4 +1,4 @@
-import React, { useEffect, FC } from 'react';
+import React, { FC } from 'react';
 import { Button } from 'antd';
 import { BulbOutlined, SunOutlined } from '@ant-design/icons';
 import { useStoreDispatch, useStoreSelector, StoreState } from '@/store';
@@ -12,11 +12,6 @@ const Dark: FC<PropsDark> = () => {
   /** Data */
   const dispatch = useStoreDispatch(); // 调用 store 方法
   const { darkMode } = useStoreSelector((state: StoreState) => state.dark);
-
-  /** Life Cycle Hook */
-  useEffect(() => {
-    dispatch(setDarkModeClass(darkMode));
-  }, []);
 
   /** Method */
   const onChangeDark = () => {

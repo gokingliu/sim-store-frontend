@@ -1,6 +1,7 @@
 import React, { FC, forwardRef, Ref, useImperativeHandle, useState } from 'react';
 import { Descriptions, Modal, type DescriptionsProps } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useResponsive } from '@/components/common/responsive';
 import Api from '@/apis';
 import { PropsHomeMessage, ResponseMessageInfo } from '@/types';
 
@@ -21,6 +22,7 @@ const HomeMessage: FC<PropsHomeMessage> = forwardRef(
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [items, setItems] = useState<DescriptionsProps['items']>([]);
     const { t } = useTranslation();
+    const desktop = useResponsive();
 
     /** Method */
     const handleData = (data: ResponseMessageInfo): DescriptionsProps['items'] => [
@@ -57,7 +59,7 @@ const HomeMessage: FC<PropsHomeMessage> = forwardRef(
       <Modal
         destroyOnClose
         title={t('消息')}
-        width="30%"
+        width={desktop ? '600px' : 'calc(100% - 32px)'}
         open={isModalOpen}
         onCancel={handleCancel}
         cancelButtonProps={{ size: 'middle' }}

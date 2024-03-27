@@ -4,37 +4,6 @@
   min-height: 600px;
   background-color: #fff;
 
-  .sider-logo {
-    display: flex;
-    align-items: center;
-    height: 48px;
-    border-color: rgb(23, 21, 20);
-
-    .logo {
-      display: block;
-      width: 32px;
-      height: 32px;
-      margin: 0 10px 0 24px;
-    }
-
-    .logo-title {
-      animation: opacity 0.5s linear;
-      line-height: 48px;
-      font-size: 16px;
-      font-weight: 800;
-      color: #fff;
-    }
-
-    @keyframes opacity {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-  }
-
   .index-header {
     display: flex;
     align-items: center;
@@ -59,6 +28,47 @@
   .index-content {
     height: calc(100vh - 48px);
     padding: 16px;
+  }
+}
+
+.sider-drawer {
+  .ant-drawer-header {
+    display: none;
+  }
+
+  .ant-drawer-body{
+    padding: 0;
+  }
+}
+
+.sider-logo {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  border-color: rgb(23, 21, 20);
+
+  .logo {
+    display: block;
+    width: 32px;
+    height: 32px;
+    margin: 0 10px 0 24px;
+  }
+
+  .logo-title {
+    animation: opacity 0.5s linear;
+    line-height: 48px;
+    font-size: 16px;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  @keyframes opacity {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 }
 

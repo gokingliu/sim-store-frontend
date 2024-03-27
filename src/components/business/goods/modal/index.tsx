@@ -1,6 +1,7 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useState, useRef, ElementRef, FC, Ref } from 'react';
 import { Modal } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useResponsive } from '@/components/common/responsive';
 import GoodsInfo from '@/components/business/goods/info';
 import GoodsEdit from '@/components/business/goods/edit';
 import GoodsRemoved from '@/components/business/goods/removed';
@@ -23,12 +24,17 @@ const GoodsModal: FC<PropsGoodsModal> = forwardRef(
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [config, setConfig] = useState<GoodsModalConfig | null>(null);
     const { t } = useTranslation();
+    const desktop = useResponsive();
 
     /** Life Cycle Hook */
     useEffect(() => {
       switch (button) {
         case '详情':
-          setConfig({ childrenNode: <GoodsInfo id={id} />, okButton: false, width: '70%' });
+          setConfig({
+            childrenNode: <GoodsInfo id={id} />,
+            okButton: false,
+            width: desktop ? '920px' : 'calc(100% - 32px)',
+          });
           break;
         case '下架':
           setConfig({
@@ -36,7 +42,7 @@ const GoodsModal: FC<PropsGoodsModal> = forwardRef(
               <GoodsRemoved ref={removedRef} data={{ id, name }} loadingFC={loadingFC} closeModal={closeModal} />
             ),
             okButton: true,
-            width: '20%',
+            width: desktop ? '450px' : 'calc(100% - 32px)',
           });
           break;
         case '添加':
@@ -44,7 +50,7 @@ const GoodsModal: FC<PropsGoodsModal> = forwardRef(
           setConfig({
             childrenNode: <GoodsEdit ref={editRef} id={id} loadingFC={loadingFC} closeModal={closeModal} />,
             okButton: true,
-            width: '30%',
+            width: desktop ? '550px' : 'calc(100% - 32px)',
           });
           break;
       }
